@@ -6,6 +6,7 @@
     "epsilon_0": 1.0,
     "loss_tangent": 0.01,
 
+    "antenna_gain": 1.64,
     "transmit_power": 800,
     "noise_level": 1e-12,
 
