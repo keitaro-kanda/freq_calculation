@@ -105,7 +105,7 @@ def calc_Pr():
     plt.legend()
     plt.grid()
 
-    plt.savefig('fig/gain_'+str(gain)+'_noise_'+str(noise_level_W)+'.png')
+    #plt.savefig('fig/gain_'+str(gain)+'_noise_'+str(noise_level)+'.png')
 
 
     plt.show()
