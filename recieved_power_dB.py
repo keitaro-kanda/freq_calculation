@@ -78,6 +78,18 @@ def calc_Pr():
     Pr_75 = calc_Pr_certain_freq(75.0)
 
 
+
+    # アウトプットを保存するフォルダを作成
+    folder_name = "output/gain"+str(gain)+"_altitude"+str(altitude)
+    if not os.path.exists(folder_name):
+        os.makedirs(folder_name)
+
+    
+    # パラメータ情報を保存
+    with open(folder_name + "/params.json", "w") as f:
+        json.dump(params, f)
+
+    
     # カラーマップをプロット
     plt.figure(figsize=(18, 7))
 
@@ -104,9 +116,8 @@ def calc_Pr():
     plt.ylabel('Received Power [dB]')
     plt.legend()
     plt.grid()
-
-    #plt.savefig('fig/gain_'+str(gain)+'_noise_'+str(noise_level)+'.png')
-
+    
+    plt.savefig(folder_name + "/detectability_map.png")
 
     plt.show()
 
