@@ -1,6 +1,6 @@
 ### SELENE/LRS
 
-name | value
+Parameter | Value
 --- | ---
 Antenna Type | half dipole
 Transmission Power | 800 W 
@@ -13,7 +13,7 @@ Altitude | 100 km
 
 ### Mars Reconnaissance Orbiter/SHARAD
 
-name | value
+Parameter | Value
 --- | ---
 Antenna Type | 10m tip-to-tip dipole
 Transmission Power | 10 W 
@@ -26,7 +26,7 @@ Altitude | 255-320 km
 
 ### Mars Express/MARSIS
 
-name | value
+Parameter | Value
 --- | ---
 Antenna Type | 40m tip-to-tip dipole
 Transmission Power | 10 W 
@@ -39,7 +39,7 @@ Altitude | 250-900 km
 
 ### Perseverrance Rover/RIMFAX
 
-name | value
+Parameter | Value
 --- | ---
 Antenna Type | bow-tie slot
 Transmission Power | ??
@@ -52,11 +52,12 @@ Altitude | 0.6 m
 
 ### Zhurong Rover/RoPeR
 
-name | CH1 | CH2
+Parameter | CH1 | CH2
 --- | --- | ---
 Antenna Type | monopole x2 | vivaldi x2
 Transmission Power | +27 dBm | +27 dBm
 Noise Level | -87 dBm | -120 dBm
+Dynamic Range (to Transmission Power) | 114 dB | 147 dB
 Antenna Gain | ?? | ??
 Operation Frequency | 15-95 MHz | 0.45-2.15 GHz
 Altitude | 0.8 m | 0.3 m
