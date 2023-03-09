@@ -9,11 +9,12 @@
     "transmit_power": 800,
     "noise_level": 1e-12,
 
-    "min_frequency": 1e9,
-    "max_frequency": 10e9,
-    "frequency_step": 1e8,
+    "min_frequency": 1,
+    "max_frequency": 100,
+    "frequency_step": 5,
+
     "min_depth": 0,
-    "max_depth": 100,
+    "max_depth": 201,
     "depth_step": 0.1,
-    "altitude": 500
+    "altitude": 0
 }
