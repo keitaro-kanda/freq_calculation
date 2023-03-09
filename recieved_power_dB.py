@@ -1,8 +1,14 @@
+import json
 from cProfile import label
 
 import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib.colors import Normalize
+
+# "params.json"の読み込み
+with open('params.json') as f:
+    params = json.load(f)
+
 
 # 定数の設定
 c = 299792458  # 光速（m/s）
