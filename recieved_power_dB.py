@@ -11,12 +11,12 @@ with open('params.json') as f:
 
 
 # 定数の設定
-c = 299792458  # 光速（m/s）
+c = params['speed_of_light']
 pi = np.pi  # π
-sigma = 30.0  # レーダー断面積（dB）
-epsilon_r = 5.7  # 誘電率
-epsilon_0 = 1.0  # 真空雨の誘電率　
-loss_tangent = 0.01  # 損失角（tan）
+sigma = ['radar_cross_section']  # レーダー断面積（dB）
+epsilon_r = ['epsilon_r']  # 誘電率
+epsilon_0 = ['epsilon_0']  # 真空雨の誘電率　
+loss_tangent = ['loss_tangent']  # 損失角（tan）
 Pt= 800 # 放射パワー（W）
 
 def calc_Pr(gain, noise_level_W):  

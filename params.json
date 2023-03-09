@@ -1,11 +1,12 @@
 {
     "speed_of_light": 299792458,
-    "pi": 3.141592653589793,
-    "radar_cross_section": 10,
-    "ground_permittivity": 8.8541878128e-12,
-    "vacuum_permittivity": 8.8541878128e-12,
-    "loss_tangent": 0.1,
-    "transmit_power": 10000,
+
+    "radar_cross_section": 30,
+    "epsilon_r": 5.7,
+    "epsilon_0": 1.0,
+    "loss_tangent": 0.01,
+
+    "transmit_power": 800,
     "noise_power": 0.001,
     "min_frequency": 1e9,
     "max_frequency": 10e9,
