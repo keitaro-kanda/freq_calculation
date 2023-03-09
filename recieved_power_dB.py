@@ -19,6 +19,7 @@ epsilon_r = params['epsilon_r']  # 地面の比誘電率
 epsilon_0 = params['epsilon_0']  # 真空雨の誘電率　
 loss_tangent = params['loss_tangent']  # 損失角（tan）
 
+gain = params['antenna_gain']
 Pt = params['transmit_power'] # 放射パワー[W]
 noise_level = params['noise_level'] # ノイズレベル[W]
 
@@ -35,7 +36,7 @@ altitude = params['altitude'] #探査機の高度[m]
 
 
 # 受信パワーの計算
-def calc_Pr(gain, noise_level_W):  
+def calc_Pr():  
     #　反射係数・透過係数
     Gamma_r = (np.sqrt(epsilon_r) - np.sqrt(epsilon_0))**2 / (np.sqrt(epsilon_r) + np.sqrt(epsilon_0))**2
     Gamma_t = 1-Gamma_r
@@ -110,4 +111,4 @@ def calc_Pr(gain, noise_level_W):
     plt.show()
 
 
-calc_Pr(1.64, 1e-12)
+calc_Pr()
