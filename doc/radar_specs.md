@@ -2,6 +2,7 @@
 
 name | value
 --- | ---
+Antenna Type | half dipole
 Transmission Power | 800 W 
 Noise Level | -90 dBm 
 Antenna Gain | 1.64 (dimensionless) 
@@ -14,6 +15,7 @@ Altitude | 100 km
 
 name | value
 --- | ---
+Antenna Type | 10m tip-to-tip dipole
 Transmission Power | 10 W 
 Noise Level | same as galactic noise?? 
 Antenna Gain | 1 
@@ -26,6 +28,7 @@ Altitude | 255-320 km
 
 name | value
 --- | ---
+Antenna Type | 40m tip-to-tip dipole
 Transmission Power | 10 W 
 Noise Level | ?? 
 Antenna Gain | 2.1 dB 
@@ -38,9 +41,22 @@ Altitude | 250-900 km
 
 name | value
 --- | ---
+Antenna Type | bow-tie slot
 Transmission Power | ??
 Noise Level | ?? 
-Antenna Gain | ave: 3 dBi (max: 8 dBi / @ 500 MHz) 
+Antenna Gain | Ave: 3 dBi <br>(Max: 8 dBi / @ 500 MHz) 
 Operation Frequency | 150-1200 MHz 
-Altitude | 0 m
+Altitude | 0.6 m
 
+
+
+### Zhurong Rover/RoPeR
+
+name | CH1 | CH2
+--- | --- | ---
+Antenna Type | monopole x2 | vivaldi x2
+Transmission Power | +27 dBm | +27 dBm
+Noise Level | -87 dBm | -120 dBm
+Antenna Gain | ?? | ??
+Operation Frequency | 15-95 MHz | 0.45-2.15 GHz
+Altitude | 0.8 m | 0.3 m
