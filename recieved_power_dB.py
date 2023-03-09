@@ -20,7 +20,7 @@ epsilon_0 = params['epsilon_0']  # 真空雨の誘電率　
 loss_tangent = params['loss_tangent']  # 損失角（tan）
 
 Pt = params['transmit_power'] # 放射パワー[W]
-noise_lebel = params['noise_level'] # ノイズレベル[W]
+noise_level = params['noise_level'] # ノイズレベル[W]
 
 freq_min = params['min_frequency'] # 周波数の最小値[MHz]
 freq_max = params['max_frequency'] # 周波数の最大値[MHz]
@@ -34,6 +34,7 @@ altitude = params['altitude'] #探査機の高度[m]
 
 
 
+# 受信パワーの計算
 def calc_Pr(gain, noise_level_W):  
     #　反射係数・透過係数
     Gamma_r = (np.sqrt(epsilon_r) - np.sqrt(epsilon_0))**2 / (np.sqrt(epsilon_r) + np.sqrt(epsilon_0))**2
@@ -42,13 +43,13 @@ def calc_Pr(gain, noise_level_W):
     print('through:',Gamma_t)
 
     #周波数、深さ
-    freq = np.arange(1, 201, 1.0)
-    depth = np.arange(1, 51, 1.0)
+    freq = np.arange(freq_min, freq_max, freq_step)
+    depth = np.arange(depth_min, depth_max, depth_step)
     # Rとfのメッシュグリッドを生成
     f_mesh, R_mesh = np.meshgrid(freq, depth)
 
-    # ノイズレベルの設定
-    noise_dB = 10*np.log10(noise_level_W / 800)
+    # ノイズレベルの算出[dB]
+    noise_dB = 10*np.log10(noise_level / Pt)
 
 
     # 受信強度の計算[dB]
