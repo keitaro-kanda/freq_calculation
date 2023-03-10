@@ -8,7 +8,6 @@ from matplotlib.colors import Normalize
 # "params.json"の読み込み
 with open('params.json') as f:
     params = json.load(f)
-    #aiueo
 
 
 # 変数の定義
