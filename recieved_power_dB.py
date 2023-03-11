@@ -77,6 +77,8 @@ def calc_Pr():
     Pr_25 = calc_Pr_certain_freq(25.0)
     Pr_50 = calc_Pr_certain_freq(50.0)
     Pr_75 = calc_Pr_certain_freq(75.0)
+    Pr_100 = calc_Pr_certain_freq(75.0)
+    Pr_150 = calc_Pr_certain_freq(75.0)
 
 
 
@@ -110,6 +112,8 @@ def calc_Pr():
     plt.plot(depth, Pr_25, label='25 MHz')
     plt.plot(depth, Pr_50, label='50 MHz')
     plt.plot(depth, Pr_75, label='75 MHz')
+    plt.plot(depth, Pr_100, label='100 MHz')
+    plt.plot(depth, Pr_150, label='150 MHz')
     #plt.hlines(noise_dB, min(depth), max(depth), label='noise level')
 
     plt.title("Received Power at each Frequecy")
