@@ -108,11 +108,11 @@ def calc_Pr():
 
 
     plt.subplot(1, 2, 2)
-    plt.plot(depth, Pr_15, label='10 MHz')
+    plt.plot(depth, Pr_15, label='15 MHz')
     plt.plot(depth, Pr_25, label='25 MHz')
     plt.plot(depth, Pr_50, label='50 MHz')
     plt.plot(depth, Pr_75, label='75 MHz')
-    plt.plot(depth, Pr_95, label='100 MHz')
+    plt.plot(depth, Pr_95, label='95 MHz')
     plt.plot(depth, Pr_150, label='150 MHz')
     #plt.hlines(noise_dB, min(depth), max(depth), label='noise level')
 
