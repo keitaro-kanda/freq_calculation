@@ -77,8 +77,8 @@ def calc_Pr():
     Pr_25 = calc_Pr_certain_freq(25.0)
     Pr_50 = calc_Pr_certain_freq(50.0)
     Pr_75 = calc_Pr_certain_freq(75.0)
-    Pr_100 = calc_Pr_certain_freq(75.0)
-    Pr_150 = calc_Pr_certain_freq(75.0)
+    Pr_100 = calc_Pr_certain_freq(100.0)
+    Pr_150 = calc_Pr_certain_freq(150.0)
 
 
 
