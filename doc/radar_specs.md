@@ -58,6 +58,6 @@ Antenna Type | monopole x2 | vivaldi x2
 Transmission Power | +27 dBm (0.501 W)| +27 dBm (0.501 W)
 Noise Level | -87 dBm (2.0e-12 W)| -120 dBm (1e-15 mW)
 Dynamic Range (to Transmission Power) | 114 dB | 147 dB
-Antenna Gain | -5.5 dB (@ 50 MHz) <br>~ -3.0 dB (@ 75 MHz) | 2.8 dB(@ 0.8 GHz) <br>~ 9.0 dB (@ 1.8 GHz)
+Antenna Gain | -5.5 dB (@ 50 MHz) <br>~ -3.0 dB (@ 75 MHz)　？？ | 2.8 dB(@ 0.8 GHz) <br>~ 9.0 dB (@ 1.8 GHz) ？？
 Operation Frequency | 15-95 MHz | 0.45-2.15 GHz
 Altitude | 0.8 m | 0.3 m
