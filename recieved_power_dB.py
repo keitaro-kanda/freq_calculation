@@ -59,6 +59,7 @@ def calc_Pr():
     Pr = 10.0 * np.log10(gain**2 * c**2 / (4.0 * pi)**3 / (R_mesh + altitude)**4 / (f_mesh*10**6)**2 * sigma) + \
         10.0 * np.log10(Gamma_r * Gamma_t**4) - \
         (0.091 * f_mesh * np.sqrt(epsilon_r) * loss_tangent) * 2.0 * R_mesh
+    #　ノイズレベルに対する強度に変換
     Pr_detectability = Pr - noise_dB
 
 
