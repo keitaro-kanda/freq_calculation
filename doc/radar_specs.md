@@ -42,7 +42,7 @@ Altitude | 250-900 km
 Parameter | Value
 --- | ---
 Antenna Type | bow-tie slot
-Transmission Power | ??
+Transmission Power | -18 ~ +13 dBm <br>(1.6e-5 ~ 2.0e-2 W)
 Noise Level | ?? 
 Antenna Gain | Ave: 3 dBi <br>(Max: 8 dBi / @ 500 MHz) 
 Operation Frequency | 150-1200 MHz 
