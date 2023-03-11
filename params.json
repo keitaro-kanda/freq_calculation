@@ -11,11 +11,11 @@
     "noise_level": 2e-12,
 
     "min_frequency": 1,
-    "max_frequency": 201,
+    "max_frequency": 301,
     "frequency_step": 5,
 
     "min_depth": 1,
-    "max_depth": 50,
+    "max_depth": 100,
     "depth_step": 0.1,
     "altitude": 0e3
 }
