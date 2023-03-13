@@ -89,7 +89,7 @@ def calc_Pr():
 
 
     # アウトプットを保存するフォルダを作成
-    folder_name = "output_recieved_power/gain"+str(gain)+"_altitude"+str(altitude)+'transmssion'+str(Pt)+'noise'+str(noise_dB)
+    folder_name = "output_recieved_power/"+params_file+"/gain"+str(gain)+"_altitude"+str(altitude)+'transmssion'+str(Pt)+'noise'+str(noise_dB)
     if not os.path.exists(folder_name):
         os.makedirs(folder_name)
 
