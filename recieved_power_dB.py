@@ -5,9 +5,15 @@ import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib.colors import Normalize
 
-# "params.json"の読み込み
-with open('params.json') as f:
+
+
+# 選択するパラメータファイルの指定
+params_file = "LRS_params.json"  # または "RoPeR_params.json"
+
+# パラメータファイルの読み込み
+with open(params_file) as f:
     params = json.load(f)
+
 
 
 # 変数の定義
