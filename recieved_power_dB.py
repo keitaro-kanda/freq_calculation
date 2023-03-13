@@ -8,7 +8,7 @@ from matplotlib.colors import Normalize
 
 
 # 選択するパラメータファイルの指定
-params_file = "LRS"  # LRS/RoPeR
+params_file = "RIMFAX"  # LRS/RoPeR/RIMFAX
 
 # パラメータファイルの読み込み
 with open('params/'+params_file + '_params.json') as f:
