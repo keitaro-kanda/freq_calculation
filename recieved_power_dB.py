@@ -11,7 +11,7 @@ from matplotlib.colors import Normalize
 params_file = "RoPeR"  # または "RoPeR_params.json"
 
 # パラメータファイルの読み込み
-with open(params_file + '_params.json') as f:
+with open('params/'+params_file + '_params.json') as f:
     params = json.load(f)
 
 
