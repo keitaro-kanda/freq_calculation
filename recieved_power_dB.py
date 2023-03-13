@@ -8,7 +8,7 @@ from matplotlib.colors import Normalize
 
 
 # 選択するパラメータファイルの指定
-params_file = "LRS_params.json"  # または "RoPeR_params.json"
+params_file = "RoPeR_params.json"  # または "RoPeR_params.json"
 
 # パラメータファイルの読み込み
 with open(params_file) as f:
