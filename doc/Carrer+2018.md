@@ -1,7 +1,7 @@
 ### 3. Radar sounder design and lava tubes detectability analysis
 #### 考慮してるもの
-- レゴリスの影響（3.1章）
-- レーダー方程式
+- レゴリスの影響（3.1.章）
+- レーダー方程式（3.3.章）
     - エコー強度密度＠アンテナ位置： 
     $S_1 = \frac{P_t G^2 \lambda ^2}{(4 \pi)^3 R_e ^4}$
 
@@ -19,6 +19,10 @@
     - チューブ床エコー（レーダー断面積を考慮）
     $P_f = S_3 \sigma_f^0(0) A_f  $
         - $A_f = min (w, \sqrt{2 \lambda h}) \times \sqrt{2 \lambda h} $　
-        ：チューブ床の有効面積？(equivalent areaof the lava tube fllor)
+        ：チューブ床の有効面積？(equivalent areaof the lava tube fllor) 
+            - $h$：25 km ??
+            - $w$：250 m〜
+            - $\lambda$：30 m (10 MHz) / 5 m (60 MHz) / 3 m (100MHz)
+            - $\sqrt{2 \lambda h} =  500 (\lambda = 5 \mathrm{m}))$
         - $\sigma_f^0(0) =  \frac{C_f \Gamma _{34}}{2} \left( \frac{1}{\mathrm{cos}^4 \theta + C_f \mathrm{sin}^2 \theta} \right)^{3/2} $ 
         ：単位面積あたりの背景散乱断面積？(backscattering cross-section normalized to unit area)
