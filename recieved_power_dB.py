@@ -5,8 +5,6 @@ import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib.colors import Normalize
 
-
-
 # 選択するパラメータファイルの指定
 params_file = "RIMFAX"  # LRS/RoPeR/RIMFAX
 
@@ -89,7 +87,7 @@ def calc_Pr():
 
 
     # アウトプットを保存するフォルダを作成
-    folder_name = "output_recieved_power/"+params_file+"/gain"+str(gain)+"_altitude"+str(altitude)+'transmssion'+str(Pt)+'noise'+str(noise_dB)
+    folder_name = "output_recieved_power/"+params_file+"/altitude"+str(altitude)+'noise'+str(noise_dB)
     if not os.path.exists(folder_name):
         os.makedirs(folder_name)
 
