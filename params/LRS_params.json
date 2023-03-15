@@ -17,5 +17,5 @@
     "min_depth": 1.0,
     "max_depth": 100.0,
     "depth_step": 0.1,
-    "altitude": 50e3
+    "altitude": 30e3
 }
