@@ -1,7 +1,8 @@
 ### 3. Radar sounder design and lava tubes detectability analysis
 #### 考慮してるもの
-- レゴリスの影響（3.1.章）
-- レーダー方程式（3.3.章）
+- ##### 3.1.章：レゴリスの影響
+- ##### 3.2.章：解像度
+- ##### 3.3.章：レーダー方程式
     - エコー強度密度＠アンテナ位置： 
     $S_1 = \frac{P_t G^2 \lambda ^2}{(4 \pi)^3 R_e ^4}$
 
@@ -27,6 +28,32 @@
             - →$A_f = 125000$から$250000$？？？
         - $\sigma_f^0(0) =  \frac{C_f \Gamma _{34}}{2} \left( \frac{1}{\mathrm{cos}^4 \theta + C_f \mathrm{sin}^2 \theta} \right)^{3/2} $ 
         ：単位面積あたりの背景散乱断面積？(backscattering cross-section normalized to unit area)
+- ##### 3.4.章：S/N比(SNR)
+    - $ SNR = \frac{P_f}{P_n} = P_f / k_b T_e(f_0)B $
+        - $k_b$：ボルツマン定数
+        - $T_e(f_0)$：frequency dependent galactic noise temperature
+        - $B (= 0.5f_0)$：frequency band width
+    - Range Compression Gain
+        $G_r = B \times T_s$
+        - $B = 0.5 f_0$
+        - $T_s$：パルス時間幅
+    - Azimuth Compression Gain
+    $G_{az} = \frac{L_s}{\nu_s PRI} = \frac{\sqrt{2 \lambda h}}{\nu_s}PRF $
+        - $PRF = \frac{4 \nu_s}{\lambda}\mathrm{sin}\theta _c $：minimum pulse repitition freqenxy
+        - $\nu_s$：軌道上での衛星の速度
+        - $\theta_c$：clutter角度
+- ##### 3.5.章：Signal/Clutter比(SCR)
+    - Clutter Echo Power
+    $P_c = \frac{P_t G^2 \lambda ^2 \sigma_s^0 A_c}{(4 \pi)^3 R_c ^4} $
+        - $R_c =  h + r_t \sqrt{\varepsilon_1} + h_r \sqrt{\varepsilon_2} + w/3$
+        Clutter Slant Range
+        - $A_c = \sqrt{2 \lambda h} \frac{c_0}{B \mathrm{sin} \theta _c} $
+        Equivalent Clutter Area
+        - \theta _c = \mathrm{cos}^{-1}(h/R_c) $
+        Clutter Angle
+        - $\sigma_s^0$：surface back-scattering coefficient
+    - Signal-to-Clutter Ratio (SCR)
+    $SCR = \frac{P_f}{P_c} $
 
 
 #### パラメータの設定
@@ -41,3 +68,4 @@ Carrier Frequency | 10, 50, 100 MHz
 Relative Permitivity | $\varepsilon_1 = 2.7$ <br> $\varepsilon_2 = 4.0$ <br> $\varepsilon_4 = 4.0$
 Losstangent | 0.01
 Regolith Layer | 8.5 m
+Detectability の定義| 1. $SCR>0$ <br> 2. $SNR>10 \mathrm{dB}$ <br> 3.  $h_r$がレンジ解像度の２倍以上 <br> 4. $w$がaong-track解像度以上
