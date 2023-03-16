@@ -15,7 +15,7 @@
     "frequency_step": 5,
 
     "min_depth": 1.0,
-    "max_depth": 100.0,
+    "max_depth": 300.0,
     "depth_step": 1.0,
     "altitude": 25e3
 }
