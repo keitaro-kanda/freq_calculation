@@ -30,9 +30,10 @@
         ：単位面積あたりの背景散乱断面積？(backscattering cross-section normalized to unit area)
 - ##### 3.4.章：S/N比(SNR)
     - $ SNR = \frac{P_f}{P_n} = P_f / k_b T_e(f_0)B $
-        - $k_b$：ボルツマン定数
-        - $T_e(f_0)$：frequency dependent galactic noise temperature
-        - $B (= 0.5f_0)$：frequency band width
+        - $k_b$：ボルツマン定数 [J/K]
+        - $T_e(f_0)$：frequency dependent galactic noise temperature [K] ($65\times 10^3$@ 20 MHz)
+        - $B (= 0.5f_0)$：frequency band width [Hz=/sec]
+        - $P_n = 1.38 \times 10^{-23} \cdot 65\times 10^3 \cdot 10 = 1.17 \times 10^{-17} $ [J/sec = W]
     - Range Compression Gain
         $G_r = B \times T_s$
         - $B = 0.5 f_0$
