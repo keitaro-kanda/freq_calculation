@@ -27,3 +27,17 @@
             - →$A_f = 125000$から$250000$？？？
         - $\sigma_f^0(0) =  \frac{C_f \Gamma _{34}}{2} \left( \frac{1}{\mathrm{cos}^4 \theta + C_f \mathrm{sin}^2 \theta} \right)^{3/2} $ 
         ：単位面積あたりの背景散乱断面積？(backscattering cross-section normalized to unit area)
+
+
+#### パラメータの設定
+Parameter | Value
+--- | ---
+Transmission Power | 800 W
+Antenna Gain | 1.0 dB
+Pulse Repetition Frequency | 500 Hz 
+Pulse Width | 100 μsec
+Altitude | 25 km 
+Carrier Frequency | 10, 50, 100 MHz 
+Relative Permitivity | $\varepsilon_1 = 2.7$ <br> $\varepsilon_2 = 4.0$ <br> $\varepsilon_4 = 4.0$
+Losstangent | 0.01
+Regolith Layer | 8.5 m
