@@ -24,5 +24,6 @@
             - $w$：250 m〜
             - $\lambda$：30 m (10 MHz) / 5 m (60 MHz) / 3 m (100MHz)
             - $\sqrt{2 \lambda h} =  500 (\lambda = 5 \mathrm{m})$
+            - →$A_f = 125000$から$250000$？？？
         - $\sigma_f^0(0) =  \frac{C_f \Gamma _{34}}{2} \left( \frac{1}{\mathrm{cos}^4 \theta + C_f \mathrm{sin}^2 \theta} \right)^{3/2} $ 
         ：単位面積あたりの背景散乱断面積？(backscattering cross-section normalized to unit area)

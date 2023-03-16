@@ -77,17 +77,17 @@ def calc_Pr():
         return Pr_freq_detectability
     
 
-    Pr_15 = calc_Pr_certain_freq(15.0)
+    Pr_15 = calc_Pr_certain_freq(5.0)
     Pr_25 = calc_Pr_certain_freq(25.0)
     Pr_50 = calc_Pr_certain_freq(50.0)
     Pr_75 = calc_Pr_certain_freq(75.0)
-    Pr_95 = calc_Pr_certain_freq(95.0)
+    Pr_95 = calc_Pr_certain_freq(100.0)
     Pr_150 = calc_Pr_certain_freq(150.0)
 
 
 
     # アウトプットを保存するフォルダを作成
-    folder_name = "output_recieved_power/"+params_file+"/altitude"+str(altitude)+'noise'+str(noise_dB)
+    folder_name = "output_recieved_power/"+params_file+"/altitude"+str(altitude)+'noise'+str(noise_dB)+'RCS'+str(sigma)
     if not os.path.exists(folder_name):
         os.makedirs(folder_name)
 
@@ -103,7 +103,7 @@ def calc_Pr():
 
     #　Pr_dBのプロット
     plt.subplot(1, 2, 1)
-    plt.pcolormesh(f_mesh, R_mesh, Pr_detectability, cmap='coolwarm', shading='auto', norm=Normalize(vmin=-150, vmax=150))
+    plt.pcolormesh(f_mesh, R_mesh, Pr_detectability, cmap='coolwarm', shading='auto', norm=Normalize(vmin= -50, vmax=50))
 
     plt.title("Recived Power")
     plt.xlabel('Frequency [MHz]')
@@ -112,11 +112,11 @@ def calc_Pr():
 
 
     plt.subplot(1, 2, 2)
-    plt.plot(depth, Pr_15, label='15 MHz')
+    plt.plot(depth, Pr_15, label='5 MHz')
     plt.plot(depth, Pr_25, label='25 MHz')
     plt.plot(depth, Pr_50, label='50 MHz')
     plt.plot(depth, Pr_75, label='75 MHz')
-    plt.plot(depth, Pr_95, label='95 MHz')
+    plt.plot(depth, Pr_95, label='100 MHz')
     plt.plot(depth, Pr_150, label='150 MHz')
     #plt.hlines(noise_dB, min(depth), max(depth), label='noise level')
 
