@@ -96,6 +96,11 @@ def calc_Pr():
     with open(folder_name + "/params.json", "w") as f:
         json.dump(params, f)
 
+
+    # パラメータの書き出し（txt形式）
+    with open(folder_name + '/params.txt', mode='w') as f:
+        for key, value in params.items():
+            f.write(str(key) + ": " + str(value) + "\n")
     
     # カラーマップをプロット
     plt.figure(figsize=(18, 7))
