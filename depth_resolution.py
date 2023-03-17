@@ -12,7 +12,7 @@ epsilon3 = 6.0
 c = 299792458 # [m/s]
 
 
-f0 = np.arange(1, 200) # 中心周波数
+f0 = np.arange(1, 200, 0.1) # 中心周波数
 
 dR1 = c / (2*np.sqrt(epsilon1) * f0*10**6)
 dR2 = c / (2*np.sqrt(epsilon2) * f0*10**6)
@@ -53,6 +53,7 @@ plt.xlabel('Center Frequency [MHz]', fontsize=15)
 plt.ylabel('Depth Resolution [m]', fontsize=15)
 plt.tick_params(labelsize=15)
 plt.xlim(75, 200)
+plt.ylim(0, 1.2)
 plt.grid()
 
 #グラフの体裁
