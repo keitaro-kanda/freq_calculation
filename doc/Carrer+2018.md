@@ -1,7 +1,16 @@
 ### 3. Radar sounder design and lava tubes detectability analysis
 #### 考慮してるもの
 - ##### 3.1.章：レゴリスの影響
-- ##### 3.2.章：解像度
+- ##### 3.2.章：分解能
+    - Range Resolution
+    $R_r = \frac{c_0}{2B\sqrt{\varepsilon_2}} = \frac{c_0}{f_0\sqrt{\varepsilon_2}} $
+        - $f_0$：carrier frequency
+        - $B = 0.5 f_0$：frequecy band width
+    - Along-track Resolution
+    $R_{along} = \frac{\lambda h}{2 L_s} = \sqrt{\lambda h / 2} $
+        - $L_s = \sqrt{\lambda h / 2} $：synthetic aperture 
+    - Across-track Resolution
+    $R_{across} = 2 \sqrt{c_0 h / B} $
 - ##### 3.3.章：レーダー方程式
     - エコー強度密度＠アンテナ位置： 
     $S_1 = \frac{P_t G^2 \lambda ^2}{(4 \pi)^3 R_e ^4}$
