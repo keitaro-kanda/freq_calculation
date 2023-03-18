@@ -111,10 +111,12 @@ def calc_Pr():
     plt.subplot(1, 2, 1)
     plt.pcolormesh(f_mesh, R_mesh, Pr_detectability, cmap='coolwarm', shading='auto', norm=Normalize(vmin= -50, vmax=50))
 
-    plt.title(r"$\sigma _{RCS} = $" + str(sigma) )
-    plt.xlabel('Frequency [MHz]')
-    plt.ylabel('Depth [m]')
-    plt.colorbar(label='Received power [dB]')
+    plt.title(r"$\sigma _{RCS} = $" + str(sigma) , size = 24)
+    plt.xlabel('Frequency [MHz]', size = 20)
+    plt.ylabel('Depth [m]', size = 20)
+    cbar = plt.colorbar(label='Received power [dB]')
+    cbar.ax.tick_params(labelsize=16)
+
 
 
     plt.subplot(1, 2, 2)
@@ -124,16 +126,16 @@ def calc_Pr():
     plt.plot(depth, Pr_75, label='75 MHz')
     plt.plot(depth, Pr_95, label='100 MHz')
     plt.plot(depth, Pr_150, label='150 MHz')
-    #plt.hlines(noise_dB, min(depth), max(depth), label='noise level')
 
-    plt.title("Received Power at each Frequecy")
-    plt.xlabel('Depth [m]')
-    plt.ylabel('Received Power [dB]')
-    plt.legend()
+    plt.title("Received Power at each Frequecy", size = 24)
+    plt.xlabel('Depth [m]', size=20)
+    plt.ylabel('Received Power [dB]', size=20)
+    plt.legend(fontsize = 15)
     plt.grid()
     
     plt.savefig(folder_name + "/detectability_map.png")
 
+    plt.subplots_adjust(wspace=0.2)
     plt.show()
 
 
