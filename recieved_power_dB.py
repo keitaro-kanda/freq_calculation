@@ -18,8 +18,8 @@ with open('params/'+params_file + '_params.json') as f:
 c = params['speed_of_light'] #真空中の光速[m/s]
 pi = np.pi  # 円周率π
 
-#sigma = params['radar_cross_section']  # レーダー断面積[m^2]
-sigmas = [10.0, 100.0, 1000.0]
+sigma = params['radar_cross_section']  # レーダー断面積[m^2]
+#sigmas = [10.0, 100.0, 1000.0]
 epsilon_r = params['epsilon_r']  # 地面の比誘電率
 epsilon_0 = params['epsilon_0']  # 真空雨の誘電率　
 loss_tangent = params['loss_tangent']  # 損失角（tan）
@@ -41,7 +41,7 @@ altitude = params['altitude'] #探査機の高度[m]
 
 
 # 受信パワーの計算
-def calc_Pr(sigma):  
+def calc_Pr():  
     #　反射係数・透過係数
     Gamma_r = (np.sqrt(epsilon_r) - np.sqrt(epsilon_0))**2 / (np.sqrt(epsilon_r) + np.sqrt(epsilon_0))**2
     Gamma_t = 1-Gamma_r
@@ -138,7 +138,5 @@ def calc_Pr(sigma):
 
     plt.subplots_adjust(wspace=0.2)
     plt.show()
-
-
 
 calc_Pr()
