@@ -19,6 +19,7 @@ c = params['speed_of_light'] #真空中の光速[m/s]
 pi = np.pi  # 円周率π
 
 sigma = params['radar_cross_section']  # レーダー断面積[m^2]
+#sigmas = [10.0, 100.0, 1000.0]
 epsilon_r = params['epsilon_r']  # 地面の比誘電率
 epsilon_0 = params['epsilon_0']  # 真空雨の誘電率　
 loss_tangent = params['loss_tangent']  # 損失角（tan）
@@ -87,7 +88,7 @@ def calc_Pr():
 
 
     # アウトプットを保存するフォルダを作成
-    folder_name = "output_recieved_power/"+params_file+ \
+    folder_name = "output_recieved_power/"+params_file + '/' + str(altitude) + \
     '/RCS'+str(sigma) + '_noise'+str(noise_dB) + "_h"+str(altitude)
     if not os.path.exists(folder_name):
         os.makedirs(folder_name)
@@ -107,14 +108,16 @@ def calc_Pr():
     plt.figure(figsize=(18, 7))
 
 
-    #　Pr_dBのプロット
     plt.subplot(1, 2, 1)
     plt.pcolormesh(f_mesh, R_mesh, Pr_detectability, cmap='coolwarm', shading='auto', norm=Normalize(vmin= -50, vmax=50))
 
-    plt.title(r"$\sigma _{RCS} = $" + str(sigma) )
-    plt.xlabel('Frequency [MHz]')
-    plt.ylabel('Depth [m]')
-    plt.colorbar(label='Received power [dB]')
+    plt.title(r"$\sigma _{RCS} = $" + str(sigma) , size = 24)
+    plt.xlabel('Frequency [MHz]', size = 20)
+    plt.ylabel('Depth [m]', size = 20)
+    cbar = plt.colorbar(label='Received power [dB]')
+    cbar.ax.tick_params(labelsize=16)
+    plt.tick_params(axis='both', labelsize=15)
+
 
 
     plt.subplot(1, 2, 2)
@@ -124,17 +127,16 @@ def calc_Pr():
     plt.plot(depth, Pr_75, label='75 MHz')
     plt.plot(depth, Pr_95, label='100 MHz')
     plt.plot(depth, Pr_150, label='150 MHz')
-    #plt.hlines(noise_dB, min(depth), max(depth), label='noise level')
 
-    plt.title("Received Power at each Frequecy")
-    plt.xlabel('Depth [m]')
-    plt.ylabel('Received Power [dB]')
-    plt.legend()
+    plt.title("Received Power at each Frequecy", size = 24)
+    plt.xlabel('Depth [m]', size=20)
+    plt.ylabel('Received Power [dB]', size=20)
+    plt.legend(fontsize = 15)
     plt.grid()
     
     plt.savefig(folder_name + "/detectability_map.png")
 
+    plt.subplots_adjust(wspace=0.2)
     plt.show()
-
 
 calc_Pr()
