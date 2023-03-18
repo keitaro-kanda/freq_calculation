@@ -18,7 +18,8 @@ with open('params/'+params_file + '_params.json') as f:
 c = params['speed_of_light'] #真空中の光速[m/s]
 pi = np.pi  # 円周率π
 
-sigma = params['radar_cross_section']  # レーダー断面積[m^2]
+#sigma = params['radar_cross_section']  # レーダー断面積[m^2]
+sigmas = [10.0, 100.0, 1000.0]
 epsilon_r = params['epsilon_r']  # 地面の比誘電率
 epsilon_0 = params['epsilon_0']  # 真空雨の誘電率　
 loss_tangent = params['loss_tangent']  # 損失角（tan）
@@ -40,7 +41,7 @@ altitude = params['altitude'] #探査機の高度[m]
 
 
 # 受信パワーの計算
-def calc_Pr():  
+def calc_Pr(sigma):  
     #　反射係数・透過係数
     Gamma_r = (np.sqrt(epsilon_r) - np.sqrt(epsilon_0))**2 / (np.sqrt(epsilon_r) + np.sqrt(epsilon_0))**2
     Gamma_t = 1-Gamma_r
@@ -87,7 +88,7 @@ def calc_Pr():
 
 
     # アウトプットを保存するフォルダを作成
-    folder_name = "output_recieved_power/"+params_file+ \
+    folder_name = "output_recieved_power/"+params_file + '/' + str(altitude) + \
     '/RCS'+str(sigma) + '_noise'+str(noise_dB) + "_h"+str(altitude)
     if not os.path.exists(folder_name):
         os.makedirs(folder_name)
@@ -107,7 +108,6 @@ def calc_Pr():
     plt.figure(figsize=(18, 7))
 
 
-    #　Pr_dBのプロット
     plt.subplot(1, 2, 1)
     plt.pcolormesh(f_mesh, R_mesh, Pr_detectability, cmap='coolwarm', shading='auto', norm=Normalize(vmin= -50, vmax=50))
 
@@ -116,6 +116,7 @@ def calc_Pr():
     plt.ylabel('Depth [m]', size = 20)
     cbar = plt.colorbar(label='Received power [dB]')
     cbar.ax.tick_params(labelsize=16)
+    plt.tick_params(axis='both', labelsize=15)
 
 
 
@@ -137,6 +138,7 @@ def calc_Pr():
 
     plt.subplots_adjust(wspace=0.2)
     plt.show()
+
 
 
 calc_Pr()
