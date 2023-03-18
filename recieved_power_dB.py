@@ -111,7 +111,7 @@ def calc_Pr():
     plt.subplot(1, 2, 1)
     plt.pcolormesh(f_mesh, R_mesh, Pr_detectability, cmap='coolwarm', shading='auto', norm=Normalize(vmin= -50, vmax=50))
 
-    plt.title("Recived Power")
+    plt.title(r"$\sigma _{RCS} = $" + str(sigma) )
     plt.xlabel('Frequency [MHz]')
     plt.ylabel('Depth [m]')
     plt.colorbar(label='Received power [dB]')
