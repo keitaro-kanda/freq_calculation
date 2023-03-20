@@ -83,7 +83,7 @@ def calc_Pr():
     Pr_3 = calc_Pr_certain_freq(50.0)
     Pr_4 = calc_Pr_certain_freq(100.0)
     Pr_5 = calc_Pr_certain_freq(200.0)
-    Pr_6 = calc_Pr_certain_freq(3000.0)
+    Pr_6 = calc_Pr_certain_freq(300.0)
 
 
 
@@ -131,6 +131,7 @@ def calc_Pr():
     plt.title("Received Power at each Frequecy", size = 24)
     plt.xlabel('Depth [m]', size=20)
     plt.ylabel('Received Power [dB]', size=20)
+    #plt.yscale('log')
     plt.legend(fontsize = 15)
     plt.grid()
     
