@@ -6,7 +6,7 @@ import numpy as np
 from matplotlib.colors import Normalize
 
 # 選択するパラメータファイルの指定
-params_file = "LRS"  # LRS/RoPeR/RIMFAX
+params_file = "rover"  # LRS/RoPeR/RIMFAX/rover
 
 # パラメータファイルの読み込み
 with open('params/'+params_file + '_params.json') as f:
