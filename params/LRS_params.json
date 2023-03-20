@@ -1,7 +1,7 @@
 {
     "speed_of_light": 299792458,
 
-    "radar_cross_section": 10,
+    "radar_cross_section": 1000,
     "epsilon_r": 4.0,
     "epsilon_0": 1.0,
     "loss_tangent": 0.01,
@@ -17,5 +17,5 @@
     "min_depth": 1.0,
     "max_depth": 50.0,
     "depth_step": 1.0,
-    "altitude": 50e3
+    "altitude": 100e3
 }
