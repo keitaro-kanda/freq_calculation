@@ -78,12 +78,12 @@ def calc_Pr():
         return Pr_freq_detectability
     
 
-    Pr_15 = calc_Pr_certain_freq(5.0)
-    Pr_25 = calc_Pr_certain_freq(25.0)
-    Pr_50 = calc_Pr_certain_freq(50.0)
-    Pr_75 = calc_Pr_certain_freq(75.0)
-    Pr_95 = calc_Pr_certain_freq(100.0)
-    Pr_150 = calc_Pr_certain_freq(150.0)
+    Pr_1 = calc_Pr_certain_freq(5.0)
+    Pr_2 = calc_Pr_certain_freq(25.0)
+    Pr_3 = calc_Pr_certain_freq(50.0)
+    Pr_4 = calc_Pr_certain_freq(100.0)
+    Pr_5 = calc_Pr_certain_freq(200.0)
+    Pr_6 = calc_Pr_certain_freq(3000.0)
 
 
 
@@ -121,12 +121,12 @@ def calc_Pr():
 
 
     plt.subplot(1, 2, 2)
-    plt.plot(depth, Pr_15, label='5 MHz')
-    plt.plot(depth, Pr_25, label='25 MHz')
-    plt.plot(depth, Pr_50, label='50 MHz')
-    plt.plot(depth, Pr_75, label='75 MHz')
-    plt.plot(depth, Pr_95, label='100 MHz')
-    plt.plot(depth, Pr_150, label='150 MHz')
+    plt.plot(depth, Pr_1, label='5 MHz')
+    plt.plot(depth, Pr_2, label='25 MHz')
+    plt.plot(depth, Pr_3, label='50 MHz')
+    plt.plot(depth, Pr_4, label='100 MHz')
+    plt.plot(depth, Pr_5, label='200 MHz')
+    plt.plot(depth, Pr_6, label='300 MHz')
 
     plt.title("Received Power at each Frequecy", size = 24)
     plt.xlabel('Depth [m]', size=20)
