@@ -6,13 +6,13 @@
     "epsilon_0": 1.0,
     "loss_tangent": 0.01,
 
-    "antenna_gain": 2.0,
+    "antenna_gain": 4.0,
     "transmit_power": 0.50,
     "noise_level": 1.0e-12,
 
     "min_frequency": 1.0,
     "max_frequency": 301,
-    "frequency_step": 5,
+    "frequency_step": 5.0,
 
     "min_depth": 1.0,
     "max_depth": 100.0,
