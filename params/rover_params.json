@@ -1,6 +1,6 @@
 {
     "speed_of_light": 299792458,
-    "case_number": 1,
+    "case_number": 2,
 
     "radar_cross_section": 1000,
     "epsilon_r": 4.0,
