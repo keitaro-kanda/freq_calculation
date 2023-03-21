@@ -139,7 +139,7 @@ def calc_Pr():
     plt.grid()
 
     plt.savefig('output_recieved_power/radar_cross_section.png')
-    plt.show()
+    #plt.show()
     
 
 
@@ -151,7 +151,8 @@ def calc_Pr():
     plt.pcolormesh(f_mesh, R_mesh, Pr_detectability, cmap='coolwarm', shading='auto', norm=Normalize(vmin= -50, vmax=50))
 
     if params_file == 'rover':
-        plt.title(r"$P_t = $" + str(Pt) +'[W], '+  r'$G_t =$' + str(params['antenna_gain']) + '[dBi]', size = 24)
+        plt.title('Case'+ str(params['case_number']) + ':' \
+            r"$P_t = $" + str(Pt) +'[W], '+  r'$G_t =$' + str(params['antenna_gain']) + '[dBi]', size = 24)
     else:
         plt.title(r"$h = $" + str(altitude) +'[km], '+  r'$Noise Level =$' + str(noise_level) + '[W]', size = 24)
     plt.xlabel('Frequency [MHz]', size = 20)
