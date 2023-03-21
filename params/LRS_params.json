@@ -1,15 +1,15 @@
 {
     "speed_of_light": 299792458,
-    "case_number": 2,
+    "case_number": 3,
 
     "radar_cross_section": 1000,
     "epsilon_r": 4.0,
     "epsilon_0": 1.0,
     "loss_tangent": 0.01,
 
-    "antenna_gain": 3.0,
+    "antenna_gain": 2.15,
     "transmit_power": 800,
-    "noise_level": 1.0e-17,
+    "noise_level": 1.0e-12,
 
     "min_frequency": 1.0,
     "max_frequency": 151,
@@ -18,5 +18,5 @@
     "min_depth": 1.0,
     "max_depth": 50.0,
     "depth_step": 1.0,
-    "altitude": 100e3
+    "altitude": 25e3
 }
