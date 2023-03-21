@@ -131,12 +131,15 @@ def calc_Pr():
     # レーダー断面積のプロット
     plt.figure(figsize=(10, 7))
     plt.plot(depth, sigma2)
+
+
     plt.xlabel('Depth [m]', size = 20)
     plt.ylabel('Radar Cross Section [m^2]', size = 20)
     plt.tick_params(axis='both', labelsize=15)
+    plt.grid()
 
     plt.savefig('output_recieved_power/radar_cross_section.png')
-    #plt.show()
+    plt.show()
     
 
 
