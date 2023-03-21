@@ -101,8 +101,7 @@ def calc_Pr():
 
     # アウトプットを保存するフォルダを作成
     if params_file == 'rover':
-        folder_name = "output_recieved_power/"+params_file + '/Pt=' + str(Pt) + \
-        '_gain' + str(gain) + '_noise'+str(noise_dB)
+        folder_name = "output_recieved_power/"+params_file + '/Case' + str(params['case_number'])
 
     elif params_file == 'LRS':
         folder_name = "output_recieved_power/"+params_file + '/' + str(altitude) + \
