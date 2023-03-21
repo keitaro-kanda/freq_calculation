@@ -7,7 +7,7 @@
     "loss_tangent": 0.01,
 
     "antenna_gain": 2.0,
-    "transmit_power": 0.0050,
+    "transmit_power": 0.50,
     "noise_level": 1.0e-12,
 
     "min_frequency": 1.0,
