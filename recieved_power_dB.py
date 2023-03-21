@@ -1,5 +1,6 @@
 import json
 import os
+from ast import Gt
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -18,13 +19,12 @@ with open('params/'+params_file + '_params.json') as f:
 c = params['speed_of_light'] #真空中の光速[m/s]
 pi = np.pi  # 円周率π
 
-sigma = params['radar_cross_section']  # レーダー断面積[m^2]
-#sigmas = [10.0, 100.0, 1000.0]
+#sigma = params['radar_cross_section']  # レーダー断面積[m^2]
 epsilon_r = params['epsilon_r']  # 地面の比誘電率
 epsilon_0 = params['epsilon_0']  # 真空雨の誘電率　
 loss_tangent = params['loss_tangent']  # 損失角（tan）
 
-gain = params['antenna_gain']
+gain = 10 ** (params['antenna_gain']/10) # アンテナゲイン[dBi]
 Pt = params['transmit_power'] # 放射パワー[W]
 noise_level = params['noise_level'] # ノイズレベル[W]
 
@@ -55,13 +55,17 @@ def calc_Pr():
     # Rとfのメッシュグリッドを生成
     f_mesh, R_mesh = np.meshgrid(freq, depth)
 
+    # レーダー断面積を深さに応じて変化させる
+    sigma1 = (R_mesh * 3/2) ** 2
+    sigma2 = (depth * 3/2) ** 2
+
 
     # ノイズレベルの算出[dB]
     noise_dB = 10*np.log10(noise_level / Pt)
 
 
     # 受信強度の計算[dB]
-    Pr = 10.0 * np.log10(gain**2 * c**2 / (4.0 * pi)**3 / (R_mesh + altitude)**4 / (f_mesh*10**6)**2 * sigma) + \
+    Pr = 10.0 * np.log10(gain**2 * c**2 / (4.0 * pi)**3 / (R_mesh + altitude)**4 / (f_mesh*10**6)**2 * sigma1) + \
         10.0 * np.log10(Gamma_r * Gamma_t**4) - \
         (0.091 * f_mesh * np.sqrt(epsilon_r) * loss_tangent) * 2.0 * R_mesh
     #　ノイズレベルに対する強度に変換
@@ -70,35 +74,43 @@ def calc_Pr():
 
     # 特定の周波数で固定してdepth対dBのプロットを作る
     def calc_Pr_certain_freq(certain_f):
-        Pr_freq = 10.0 * np.log10(gain**2 * c**2 / (4.0 * pi)**3 / (depth + altitude)**4 / (certain_f*10**6)**2 * sigma) + \
+        Pr_freq = 10.0 * np.log10(gain**2 * c**2 / (4.0 * pi)**3 / (depth + altitude)**4 / (certain_f*10**6)**2 * sigma2) + \
         10.0 * np.log10(Gamma_r * Gamma_t**4) - \
         (0.091 * certain_f * np.sqrt(epsilon_r) * loss_tangent) * 2.0 * depth
         Pr_freq_detectability = Pr_freq - noise_dB
         
         return Pr_freq_detectability
     
-
-    Pr_1 = calc_Pr_certain_freq(5.0)
-    Pr_2 = calc_Pr_certain_freq(25.0)
-    Pr_3 = calc_Pr_certain_freq(50.0)
-    Pr_4 = calc_Pr_certain_freq(100.0)
-    Pr_5 = calc_Pr_certain_freq(200.0)
-    Pr_6 = calc_Pr_certain_freq(300.0)
+    if params_file == 'rover' :
+        Pr_1 = calc_Pr_certain_freq(5.0)
+        Pr_2 = calc_Pr_certain_freq(25.0)
+        Pr_3 = calc_Pr_certain_freq(50.0)
+        Pr_4 = calc_Pr_certain_freq(100.0)
+        Pr_5 = calc_Pr_certain_freq(200.0)
+        Pr_6 = calc_Pr_certain_freq(300.0)
+    
+    else:
+        Pr_1 = calc_Pr_certain_freq(5.0)
+        Pr_2 = calc_Pr_certain_freq(25.0)
+        Pr_3 = calc_Pr_certain_freq(50.0)
+        Pr_4 = calc_Pr_certain_freq(75.0)
+        Pr_5 = calc_Pr_certain_freq(200.0)
+        Pr_6 = calc_Pr_certain_freq(150.0)
 
 
 
     # アウトプットを保存するフォルダを作成
     if params_file == 'rover':
         folder_name = "output_recieved_power/"+params_file + '/Pt=' + str(Pt) + \
-        '/RCS'+str(sigma) + '_gain' + str(gain) + '_noise'+str(noise_dB)
+        '_gain' + str(gain) + '_noise'+str(noise_dB)
 
     elif params_file == 'LRS':
         folder_name = "output_recieved_power/"+params_file + '/' + str(altitude) + \
-        '/RCS'+str(sigma) + '_noise'+str(noise_dB) + "_h"+str(altitude)
+        '_noise'+str(noise_dB) + "_h"+str(altitude)
 
     else:
         folder_name = "output_recieved_power/"+params_file + \
-        '/RCS'+str(sigma) + '_noise'+str(noise_dB) + "_h"+str(altitude)
+        '_noise'+str(noise_dB) + "_h"+str(altitude)
 
 
     if not os.path.exists(folder_name):
@@ -115,6 +127,19 @@ def calc_Pr():
         for key, value in params.items():
             f.write(str(key) + ": " + str(value) + "\n")
     
+
+    # レーダー断面積のプロット
+    plt.figure(figsize=(10, 7))
+    plt.plot(depth, sigma2)
+    plt.xlabel('Depth [m]', size = 20)
+    plt.ylabel('Radar Cross Section [m^2]', size = 20)
+    plt.tick_params(axis='both', labelsize=15)
+
+    plt.savefig('output_recieved_power/radar_cross_section.png')
+    #plt.show()
+    
+
+
     # カラーマップをプロット
     plt.figure(figsize=(18, 7))
 
@@ -122,7 +147,10 @@ def calc_Pr():
     plt.subplot(1, 2, 1)
     plt.pcolormesh(f_mesh, R_mesh, Pr_detectability, cmap='coolwarm', shading='auto', norm=Normalize(vmin= -50, vmax=50))
 
-    plt.title(r"$\sigma _{RCS} = $" + str(sigma) , size = 24)
+    if params_file == 'rover':
+        plt.title(r"$P_t = $" + str(Pt) +'[W], '+  r'$G_t =$' + str(params['antenna_gain']) + '[dBi]', size = 24)
+    else:
+        plt.title(r"$h = $" + str(altitude) +'[km], '+  r'$Noise Level =$' + str(noise_level) + '[W]', size = 24)
     plt.xlabel('Frequency [MHz]', size = 20)
     plt.ylabel('Depth [m]', size = 20)
     cbar = plt.colorbar(label='Received power [dB]')
