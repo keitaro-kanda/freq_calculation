@@ -1,13 +1,13 @@
 {
     "speed_of_light": 299792458,
 
-    "radar_cross_section": 1000,
+    "radar_cross_section": 10,
     "epsilon_r": 4.0,
     "epsilon_0": 1.0,
     "loss_tangent": 0.01,
 
     "antenna_gain": 4.0,
-    "transmit_power": 0.50,
+    "transmit_power": 0.050,
     "noise_level": 1.0e-12,
 
     "min_frequency": 1.0,
