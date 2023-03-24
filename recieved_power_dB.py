@@ -7,7 +7,7 @@ import numpy as np
 from matplotlib.colors import Normalize
 
 # 選択するパラメータファイルの指定
-params_file = "rover"  # LRS/RoPeR/RIMFAX/rover
+params_file = "LRS"  # LRS/RoPeR/RIMFAX/rover
 
 # パラメータファイルの読み込み
 with open('params/'+params_file + '_params.json') as f:
@@ -94,19 +94,14 @@ def calc_Pr():
         Pr_2 = calc_Pr_certain_freq(25.0)
         Pr_3 = calc_Pr_certain_freq(50.0)
         Pr_4 = calc_Pr_certain_freq(75.0)
-        Pr_5 = calc_Pr_certain_freq(200.0)
+        Pr_5 = calc_Pr_certain_freq(100.0)
         Pr_6 = calc_Pr_certain_freq(150.0)
 
 
 
     # アウトプットを保存するフォルダを作成
-    if params_file == 'rover':
-        folder_name = "output_recieved_power/"+params_file + '/Pt=' + str(Pt) + \
-        '_gain' + str(gain) + '_noise'+str(noise_dB)
-
-    elif params_file == 'LRS':
-        folder_name = "output_recieved_power/"+params_file + '/' + str(altitude) + \
-        '_noise'+str(noise_dB) + "_h"+str(altitude)
+    if params_file == 'rover' or 'LRS':
+        folder_name = "output_recieved_power/"+params_file + '/Case' + str(params['case_number'])
 
     else:
         folder_name = "output_recieved_power/"+params_file + \
@@ -129,17 +124,17 @@ def calc_Pr():
     
 
     # レーダー断面積のプロット
-    plt.figure(figsize=(10, 7))
-    plt.plot(depth, sigma2)
+    #plt.figure(figsize=(10, 7))
+    #plt.plot(depth, sigma2)
 
 
-    plt.xlabel('Depth [m]', size = 20)
-    plt.ylabel('Radar Cross Section [m^2]', size = 20)
-    plt.tick_params(axis='both', labelsize=15)
-    plt.grid()
+    #plt.xlabel('Depth [m]', size = 20)
+    #plt.ylabel('Radar Cross Section [m^2]', size = 20)
+    #plt.tick_params(axis='both', labelsize=15)
+    #plt.grid()
 
-    plt.savefig('output_recieved_power/radar_cross_section.png')
-    plt.show()
+    #plt.savefig('output_recieved_power/radar_cross_section.png')
+    #plt.show()
     
 
 
@@ -151,9 +146,11 @@ def calc_Pr():
     plt.pcolormesh(f_mesh, R_mesh, Pr_detectability, cmap='coolwarm', shading='auto', norm=Normalize(vmin= -50, vmax=50))
 
     if params_file == 'rover':
-        plt.title(r"$P_t = $" + str(Pt) +'[W], '+  r'$G_t =$' + str(params['antenna_gain']) + '[dBi]', size = 24)
+        plt.title('Case'+ str(params['case_number']) + ':' \
+            r"$P_t = $" + str(Pt) +'[W], '+  r'$G_t =$' + str(params['antenna_gain']) + '[dBi]', size = 24)
     else:
-        plt.title(r"$h = $" + str(altitude) +'[km], '+  r'$Noise Level =$' + str(noise_level) + '[W]', size = 24)
+        plt.title('Case'+ str(params['case_number']) + ':' \
+            r"$h = $" + str(altitude/1000) +'[km], '+  'Noise Level=' + str(params['noise_level']) + '[W]', size = 24)
     plt.xlabel('Frequency [MHz]', size = 20)
     plt.ylabel('Depth [m]', size = 20)
     cbar = plt.colorbar(label='Received power [dB]')
@@ -163,12 +160,21 @@ def calc_Pr():
 
 
     plt.subplot(1, 2, 2)
-    plt.plot(depth, Pr_1, label='5 MHz')
-    plt.plot(depth, Pr_2, label='25 MHz')
-    plt.plot(depth, Pr_3, label='50 MHz')
-    plt.plot(depth, Pr_4, label='100 MHz')
-    plt.plot(depth, Pr_5, label='200 MHz')
-    plt.plot(depth, Pr_6, label='300 MHz')
+    if params_file == 'rover':
+        plt.plot(depth, Pr_1, label='5 MHz')
+        plt.plot(depth, Pr_2, label='25 MHz')
+        plt.plot(depth, Pr_3, label='50 MHz')
+        plt.plot(depth, Pr_4, label='100 MHz')
+        plt.plot(depth, Pr_5, label='200 MHz')
+        plt.plot(depth, Pr_6, label='300 MHz')
+
+    else:
+        plt.plot(depth, Pr_1, label='5 MHz')
+        plt.plot(depth, Pr_2, label='25 MHz')
+        plt.plot(depth, Pr_3, label='50 MHz')
+        plt.plot(depth, Pr_4, label='75 MHz')
+        plt.plot(depth, Pr_5, label='100 MHz')
+        plt.plot(depth, Pr_6, label='150 MHz')
 
     plt.title("Received Power at each Frequecy", size = 24)
     plt.xlabel('Depth [m]', size=20)
