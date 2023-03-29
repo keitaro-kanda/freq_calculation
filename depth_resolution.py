@@ -72,7 +72,7 @@ plt.grid()
 
 #グラフの体裁
 #plt.legend(fontsize='10')
-#plt.savefig('output_resolution/Depth_resolutin.png')
+plt.savefig('output_resolution/Depth_resolutin.png')
 
 
 plt.show()
