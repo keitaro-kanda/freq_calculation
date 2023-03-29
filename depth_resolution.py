@@ -21,7 +21,7 @@ dR3 = c / (2*np.sqrt(epsilon3) * f0 *10**6 * 0.5)
 
 #描画
 plt.figure(figsize=(25, 16))
-plt.subplots_adjust(wspace=0.5)
+plt.subplots_adjust(wspace=0.7)
 plt.subplots_adjust(hspace=0.3)
 
 # ----1枚目----
@@ -58,12 +58,12 @@ plt.subplot(2, 3, 5)
 plt.plot(f0, dR1, label=r'$\varepsilon _r = 1.0$')
 plt.plot(f0, dR2, label=r'$\varepsilon_r = 4.0$')
 
-plt.title('(c) Depth Resolution (Detail of 10-75 MHz)', fontsize=24)
+plt.title('(c) Depth Resolution (Detail of 10-60 MHz)', fontsize=24)
 plt.xlabel('Center Frequency [MHz]', fontsize=20)
 plt.ylabel('Depth Resolution [m]', fontsize=20)
 plt.tick_params(labelsize=20)
-plt.xlim(10, 75)
-plt.ylim(0, 34)
+plt.xlim(10, 60)
+plt.ylim(0, 32)
 plt.grid()
 plt.legend(fontsize='20')
 
@@ -73,12 +73,12 @@ plt.subplot(2, 3, 6)
 plt.plot(f0, dR1, label=r'$\varepsilon _r = 1.0$')
 plt.plot(f0, dR2, label=r'$\varepsilon_r = 4.0$')
 
-plt.title('(d) Depth Resolution (Detail of 75-200 MHz)', fontsize=24)
+plt.title('(d) Depth Resolution (Detail of 60-300 MHz)', fontsize=24)
 plt.xlabel('Center Frequency [MHz]', fontsize=20)
 plt.ylabel('Depth Resolution [m]', fontsize=20)
 plt.tick_params(labelsize=20)
-plt.xlim(75, 200)
-plt.ylim(0, 4.4)
+plt.xlim(60, 300)
+plt.ylim(0, 5.2)
 plt.grid()
 plt.legend(fontsize='20')
 
