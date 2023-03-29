@@ -20,7 +20,7 @@ dR3 = c / (2*np.sqrt(epsilon3) * f0 *10**6 * 0.5)
 
 
 #描画
-plt.figure(figsize=(25, 14))
+plt.figure(figsize=(25, 16))
 plt.subplot(2, 3, 1)
 plt.plot(f0, dR1, label=r'$\varepsilon _r = 4.0$')
 #plt.plot(f0, dR2, label=r'$\varepsilon_r = 5.0$')
@@ -69,5 +69,8 @@ plt.grid()
 
 #グラフの体裁
 #plt.legend(fontsize='10')
-plt.savefig('output_resolution/Depth_resolutin.png')
+#plt.savefig('output_resolution/Depth_resolutin.png')
+
+#plt.subplots_adjust(wspace=2.0)
+
 plt.show()
