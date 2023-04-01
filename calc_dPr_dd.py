@@ -20,38 +20,41 @@ def bibunn_keisan():
 #bibunn_keisan()
 
 # 微分計算なしパターン
-def calc_dPr_dd(altitude):
-    # 横軸の値を生成
-    d = np.arange(0.1, 100, 0.1)
 
-    # fの値をリストに格納
-    f_list = [5, 25, 50, 75, 100, 150]
+# 横軸の値を生成
+d = np.arange(0.1, 100, 0.1)
 
-    h = altitude * 1000 # 高度
+# fの値をリストに格納
+f_list = [5, 25, 50, 75, 100, 150]
+
+# 高度設定
+altitude = 25 # [km]
+h = altitude * 1000 # [m]
 
 
-    plt.figure(figsize=(10, 4))
+plt.figure(figsize=(10, 4))
     # dPr/ddの式を計算し、グラフをプロット
-    for f in f_list:
-        ddPr = 20 * ((-2/(d+h)) + (1/d)) / np.log(10) - f * 3.64e-3
-        plt.plot(d, ddPr, label=f"f={f}")
+for f in f_list:
+    ddPr = 20 * ((-2/(d+h)) + (1/d)) / np.log(10) - f * 3.64e-3
+    plt.plot(d, ddPr, label=f"f={f}")
         
-        # dPrが0になるx座標を取得して、グラフ上に表示
-        x_intercept = d[np.argmin(np.abs(ddPr))]
-        plt.text(x_intercept, 0, f"{x_intercept:.2f}", ha="center", va="center")
+    # dPrが0になるx座標を取得して、グラフ上に表示
+    hanbetsu = np.argmin(np.abs(ddPr))
+    x_intercept = d[hanbetsu]
+    #if  hanbetsu<0.1:
+    plt.text(x_intercept, 0, f"{x_intercept:.2f}", ha="center", va="center")
 
-    # グラフのタイトル、ラベル、凡例を設定
-    plt.title(r"h="+str(altitude)+"km")
-    plt.xlabel("d")
-    plt.ylabel(r"$\frac{d P_r}{d d}$")
-    plt.ylim(-0.1, 0.1)
-    plt.legend()
 
-    # グリッドを表示
-    plt.grid()
+# グラフのタイトル、ラベル、凡例を設定
+plt.title(r"h="+str(altitude)+"km")
+plt.xlabel("d")
+plt.ylabel(r"$\frac{d P_r}{d d}$")
+plt.ylim(-0.1, 0.1)
+plt.legend()
 
-    # グラフを表示
-    plt.show()
-#
+# グリッドを表示
+plt.grid()
 
-calc_dPr_dd(25)
+# グラフを表示
+plt.show()
+
