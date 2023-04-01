@@ -32,7 +32,7 @@ f_list = [5, 25, 50, 75, 100, 150]
 #h = altitude * 1000 # [m]
 
 
-plt.figure(figsize=(14, 14))
+plt.figure(figsize=(20, 14))
 plt.subplots_adjust(wspace=0.7)
 plt.subplots_adjust(hspace=0.5)
 
@@ -49,8 +49,7 @@ for i in [1, 2, 3]:
 
         ddPr = 20 * ((-2/(d+h)) + (1/d)) / np.log(10) - f * 3.64e-3
         plt.subplot(3, 1, i)
-        plt.grid()
-        plt.plot(d, ddPr, label=f"f={f}")
+        plt.plot(d, ddPr, label=f"f={f}MHz")
         
         # dPrが0になるx座標を取得して、グラフ上に表示
         hanbetsu = np.argmin(np.abs(ddPr))
@@ -67,7 +66,7 @@ for i in [1, 2, 3]:
         plt.legend(fontsize=16)
 
         # グリッドを表示
-       #plt.grid()
+    plt.grid()
 
 # グラフを保存
 plt.savefig('output_recieved_power/dPr_dd.png')
