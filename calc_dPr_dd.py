@@ -54,13 +54,13 @@ for i in [1, 2, 3]:
         # dPrが0になるx座標を取得して、グラフ上に表示
         hanbetsu = np.argmin(np.abs(ddPr))
         x_intercept = d[hanbetsu]
-        #if  hanbetsu<0.1:
-        plt.text(x_intercept, 0, f"{x_intercept:.2f}", ha="center", va="center", size=16)
+        if abs(ddPr[hanbetsu]) < 0.01:
+            plt.text(x_intercept, 0, f"{x_intercept:.2f}", ha="center", va="center", size=16)
 
         # グラフのタイトル、ラベル、凡例を設定
         plt.title(r"h="+str(altitude)+"km", size=24)
-        plt.xlabel(r"$d$",size=20)
-        plt.ylabel(r"$\frac{d P_r}{d d}$", size=20)
+        plt.xlabel(r"$d$ [m]",size=22)
+        plt.ylabel(r"$\frac{d P_r}{d d}$", size=22)
         plt.ylim(-0.1, 0.1)
         plt.tick_params(labelsize=20)
         plt.legend(fontsize=16)
