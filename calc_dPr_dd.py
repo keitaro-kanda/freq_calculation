@@ -49,13 +49,14 @@ for i in [1, 2, 3]:
 
         ddPr = 20 * ((-2/(d+h)) + (1/d)) / np.log(10) - f * 3.64e-3
         plt.subplot(3, 1, i)
+        plt.grid()
         plt.plot(d, ddPr, label=f"f={f}")
         
         # dPrが0になるx座標を取得して、グラフ上に表示
         hanbetsu = np.argmin(np.abs(ddPr))
         x_intercept = d[hanbetsu]
         #if  hanbetsu<0.1:
-        plt.text(x_intercept, 0, f"{x_intercept:.2f}", ha="center", va="center")
+        plt.text(x_intercept, 0, f"{x_intercept:.2f}", ha="center", va="center", size=16)
 
         # グラフのタイトル、ラベル、凡例を設定
         plt.title(r"h="+str(altitude)+"km", size=24)
@@ -66,7 +67,7 @@ for i in [1, 2, 3]:
         plt.legend(fontsize=16)
 
         # グリッドを表示
-        plt.grid()
+       #plt.grid()
 
 # グラフを保存
 plt.savefig('output_recieved_power/dPr_dd.png')
