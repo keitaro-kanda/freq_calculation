@@ -60,7 +60,7 @@ for i in [1, 2, 3]:
         # グラフのタイトル、ラベル、凡例を設定
         plt.title(r"h="+str(altitude)+"km", size=24)
         plt.xlabel(r"$d$ [m]",size=22)
-        plt.ylabel(r"$\frac{d P_r}{d d}$", size=22)
+        plt.ylabel(r"$d P_r/dd$", size=22)
         plt.ylim(-0.1, 0.1)
         plt.tick_params(labelsize=20)
         plt.legend(fontsize=16)
