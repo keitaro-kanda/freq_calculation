@@ -34,7 +34,7 @@ f_list = [5, 25, 50, 75, 100, 150]
 
 plt.figure(figsize=(14, 14))
 plt.subplots_adjust(wspace=0.7)
-plt.subplots_adjust(hspace=0.3)
+plt.subplots_adjust(hspace=0.5)
 
     # dPr/ddの式を計算し、グラフをプロット
 for i in [1, 2, 3]:
