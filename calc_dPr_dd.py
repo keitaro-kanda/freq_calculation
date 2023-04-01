@@ -30,11 +30,10 @@ def calc_dPr_dd(altitude):
     h = altitude * 1000 # 高度
 
 
-
+    plt.figure(figsize=(10, 4))
     # dPr/ddの式を計算し、グラフをプロット
     for f in f_list:
         ddPr = 20 * ((-2/(d+h)) + (1/d)) / np.log(10) - f * 3.64e-3
-        plt.figure(figsize=(7, 4))
         plt.plot(d, ddPr, label=f"f={f}")
         
         # dPrが0になるx座標を取得して、グラフ上に表示
@@ -45,7 +44,7 @@ def calc_dPr_dd(altitude):
     plt.title(r"h="+str(altitude)+"km")
     plt.xlabel("d")
     plt.ylabel(r"$\frac{d P_r}{d d}$")
-    plt.ylim(-1, 1)
+    plt.ylim(-0.1, 0.1)
     plt.legend()
 
     # グリッドを表示
