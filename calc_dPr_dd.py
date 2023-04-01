@@ -20,13 +20,14 @@ def bibunn_keisan():
 #bibunn_keisan()
 
 # 微分計算なしパターン
-def calc_dPr_dd():
+def calc_dPr_dd(altitude):
     # 横軸の値を生成
-    d = np.linspace(0.1, 10, 100)
+    d = np.arange(0.1, 100, 0.1)
 
     # fの値をリストに格納
     f_list = [5, 25, 50, 100, 150]
-    h = 25e3 # 高度
+
+    h = altitude * 1000 # 高度
 
     # dPr/ddの式を計算し、グラフをプロット
     for f in f_list:
@@ -38,10 +39,10 @@ def calc_dPr_dd():
         plt.text(x_intercept, 0, f"{x_intercept:.2f}", ha="center", va="center")
 
     # グラフのタイトル、ラベル、凡例を設定
-    plt.title(r"$\frac{d P_r}{d d}$")
+    plt.title(r"h="+str(altitude)+"km")
     plt.xlabel("d")
     plt.ylabel(r"$\frac{d P_r}{d d}$")
-    plt.yscale('log')
+    plt.ylim(-1, 1)
     plt.legend()
 
     # グリッドを表示
@@ -50,3 +51,4 @@ def calc_dPr_dd():
     # グラフを表示
     plt.show()
 
+calc_dPr_dd(25)
