@@ -25,13 +25,16 @@ def calc_dPr_dd(altitude):
     d = np.arange(0.1, 100, 0.1)
 
     # fの値をリストに格納
-    f_list = [5, 25, 50, 100, 150]
+    f_list = [5, 25, 50, 75, 100, 150]
 
     h = altitude * 1000 # 高度
+
+
 
     # dPr/ddの式を計算し、グラフをプロット
     for f in f_list:
         ddPr = 20 * ((-2/(d+h)) + (1/d)) / np.log(10) - f * 3.64e-3
+        plt.figure(figsize=(7, 4))
         plt.plot(d, ddPr, label=f"f={f}")
         
         # dPrが0になるx座標を取得して、グラフ上に表示
