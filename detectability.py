@@ -52,7 +52,7 @@ f_mesh, d_mesh = np.meshgrid(freq, depth)
 noise_dB = 10*np.log10(noise_level / Pt)
 
 
-fd_array = np.zeros((len(freq), len(depth)))
+fd_array = np.zeros((len(depth), len(freq)))
 
 # 受信強度の計算[dB]
 def calc_detectability():
@@ -67,7 +67,7 @@ def calc_detectability():
             dR = c / (2*np.sqrt(epsilon_r) * f * 0.5 * 10**6)
 
             if Pr_detectability > 0 and dR <= d/6:
-                fd_array[index_f, index_d] = 1
+                fd_array[index_d, index_f] = 1
             
     return fd_array
 
