@@ -1,4 +1,5 @@
 import json
+import os
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -59,14 +60,14 @@ def calc_detectability():
     for index_f, f in enumerate(freq):
         for index_d, d in enumerate(depth):
             RCS = (d * 3/2)**2
-            Pr = 10.0 * np.log10(gain**2 * c**2 / (4.0 * pi)**3 / (d + altitude)**4 / (10**6)**2 * RCS) + \
+            Pr = 10.0 * np.log10(gain**2 * c**2 / (4.0 * pi)**3 / (d + altitude)**4 / (f*10**6)**2 * RCS) + \
                 10.0 * np.log10(Gamma_r * Gamma_t**4) - \
                 (0.091 * f * np.sqrt(epsilon_0) * loss_tangent) * 2.0 * d
             Pr_detectability = Pr - noise_dB
             
             dR = c / (2*np.sqrt(epsilon_r) * f * 0.5 * 10**6)
 
-            if Pr_detectability > 0 and dR <= d/6:
+            if Pr > noise_dB and dR <= d/6:
                 fd_array[index_d, index_f] = 1
             
     return fd_array
@@ -74,7 +75,62 @@ def calc_detectability():
 calc_detectability()
 
 
-plt.imshow(fd_array, cmap='coolwarm', origin='lower', )
+plt.figure(figsize=(20, 10))
+plt.subplots_adjust(wspace=0.3)
+
+plt.subplot(1, 2, 1)
+plt.imshow(fd_array, cmap='coolwarm', origin='lower', aspect='auto')
 plt.colorbar()
 
+# タイトルの設定
+if params_file == 'rover':
+    plt.title('Case'+ str(params['case_number']) + ':' \
+        r"$P_t = $" + str(Pt) +'[W], '+  r'$G_t =$' + str(params['antenna_gain']) + '[dBi]', size = 24)
+else:
+    plt.title('Case'+ str(params['case_number']) + ':' \
+        r"$h = $" + str(altitude/1000) +'[km], '+  'Noise Level=' + str(params['noise_level']) + '[W]', size = 24)
+plt.xlabel('Center Frequency [MHz]', size=20)  # 横軸のラベルを設定
+plt.ylabel('Tube Depth [m]', size=20)  # 縦軸のラベルを設定
+plt.grid()
+
+x_min = 1
+x_max = 20
+y_min = 60
+y_max = 100
+
+plt.subplot(1, 2, 2)
+plt.imshow(fd_array, cmap='coolwarm', origin='lower', aspect='auto')
+plt.colorbar()
+
+# タイトルの設定
+if params_file == 'rover':
+    plt.title('Case'+ str(params['case_number']) + ':' \
+        r"$P_t = $" + str(Pt) +'[W], '+  r'$G_t =$' + str(params['antenna_gain']) + '[dBi]', size = 24)
+else:
+    plt.title('Case'+ str(params['case_number']) +',Detail', size = 24)
+plt.xlim(x_min, x_max)
+plt.ylim(y_min, y_max)
+plt.xlabel('Center Frequency [MHz]', size=20)  # 横軸のラベルを設定
+plt.ylabel('Tube Depth [m]', size=20)  # 縦軸のラベルを設定
+plt.grid()
+
 plt.show()
+
+
+# アウトプットを保存するフォルダを作成
+if params_file == 'rover' or 'LRS':
+    folder_name = "output_detectability/"+params_file + '/Case' + str(params['case_number'])
+else:
+    folder_name = "output_detectability/"+params_file + \
+    '_noise'+str(noise_dB) + "_h"+str(altitude)
+
+if not os.path.exists(folder_name):
+    os.makedirs(folder_name)
+
+# パラメータの書き出し（txt形式）
+with open(folder_name + '/params.txt', mode='w') as f:
+    for key, value in params.items():
+        f.write(str(key) + ": " + str(value) + "\n")
+
+# プロットの保存
+plt.savefig(folder_name + '/detectabilitymap.png')
