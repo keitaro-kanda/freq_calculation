@@ -1,6 +1,5 @@
 import json
 import os
-from ast import Gt
 
 import matplotlib.pyplot as plt
 import numpy as np
