@@ -75,6 +75,24 @@ def calc_detectability():
 calc_detectability()
 
 
+
+# アウトプットを保存するフォルダを作成
+if params_file == 'rover' or 'LRS':
+    folder_name = "output_detectability/"+params_file + '/Case' + str(params['case_number'])
+else:
+    folder_name = "output_detectability/"+params_file + \
+    '_noise'+str(noise_dB) + "_h"+str(altitude)
+
+if not os.path.exists(folder_name):
+    os.makedirs(folder_name)
+
+# パラメータの書き出し（txt形式）
+with open(folder_name + '/params.txt', mode='w') as f:
+    for key, value in params.items():
+        f.write(str(key) + ": " + str(value) + "\n")
+
+
+# プロットの作成
 plt.figure(figsize=(20, 10))
 plt.subplots_adjust(wspace=0.3)
 
@@ -114,23 +132,7 @@ plt.xlabel('Center Frequency [MHz]', size=20)  # 横軸のラベルを設定
 plt.ylabel('Tube Depth [m]', size=20)  # 縦軸のラベルを設定
 plt.grid()
 
-plt.show()
-
-
-# アウトプットを保存するフォルダを作成
-if params_file == 'rover' or 'LRS':
-    folder_name = "output_detectability/"+params_file + '/Case' + str(params['case_number'])
-else:
-    folder_name = "output_detectability/"+params_file + \
-    '_noise'+str(noise_dB) + "_h"+str(altitude)
-
-if not os.path.exists(folder_name):
-    os.makedirs(folder_name)
-
-# パラメータの書き出し（txt形式）
-with open(folder_name + '/params.txt', mode='w') as f:
-    for key, value in params.items():
-        f.write(str(key) + ": " + str(value) + "\n")
 
 # プロットの保存
 plt.savefig(folder_name + '/detectabilitymap.png')
+plt.show()
