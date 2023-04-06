@@ -69,6 +69,8 @@ def calc_detectability():
 
             if Pr > noise_dB and dR <= d/6:
                 fd_array[index_d, index_f] = 1
+            else:
+                fd_array[index_d, index_f] = 0
             
     return fd_array
 
@@ -97,8 +99,8 @@ plt.figure(figsize=(20, 10))
 plt.subplots_adjust(wspace=0.3)
 
 plt.subplot(1, 2, 1)
-plt.imshow(fd_array, cmap='coolwarm', origin='lower', aspect='auto')
-plt.colorbar()
+plt.imshow(fd_array, cmap='coolwarm', origin='lower', aspect='auto',  vmin=0, vmax=1)
+#plt.colorbar()
 
 # タイトルの設定
 if params_file == 'rover':
@@ -109,27 +111,25 @@ else:
         r"$h = $" + str(altitude/1000) +'[km], '+  'Noise Level=' + str(params['noise_level']) + '[W]', size = 24)
 plt.xlabel('Center Frequency [MHz]', size=20)  # 横軸のラベルを設定
 plt.ylabel('Tube Depth [m]', size=20)  # 縦軸のラベルを設定
+plt.tick_params(axis='both', labelsize=15)
 plt.grid()
 
 x_min = 1
-x_max = 20
-y_min = 60
+x_max = 90
+y_min = 10
 y_max = 100
 
 plt.subplot(1, 2, 2)
-plt.imshow(fd_array, cmap='coolwarm', origin='lower', aspect='auto')
-plt.colorbar()
+plt.imshow(fd_array, cmap='coolwarm', origin='lower', aspect='auto', vmin=0, vmax=1)
+#plt.colorbar()
 
 # タイトルの設定
-if params_file == 'rover':
-    plt.title('Case'+ str(params['case_number']) + ':' \
-        r"$P_t = $" + str(Pt) +'[W], '+  r'$G_t =$' + str(params['antenna_gain']) + '[dBi]', size = 24)
-else:
-    plt.title('Case'+ str(params['case_number']) +',Detail', size = 24)
+plt.title('Case'+ str(params['case_number']) +'(Detail)', size = 24)
 plt.xlim(x_min, x_max)
 plt.ylim(y_min, y_max)
 plt.xlabel('Center Frequency [MHz]', size=20)  # 横軸のラベルを設定
 plt.ylabel('Tube Depth [m]', size=20)  # 縦軸のラベルを設定
+plt.tick_params(axis='both', labelsize=15)
 plt.grid()
 
 

@@ -1,5 +1,5 @@
 speed_of_light: 299792458
-case_number: 1
+case_number: 3
 epsilon_r: 4.0
 epsilon_0: 1.0
 loss_tangent: 0.01
@@ -12,4 +12,4 @@ frequency_step: 1
 min_depth: 1.0
 max_depth: 101.0
 depth_step: 1.0
-altitude: 25000.0
+altitude: 100000.0
