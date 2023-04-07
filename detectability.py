@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 # 選択するパラメータファイルの指定
-params_file = "LRS"  # LRS/RoPeR/RIMFAX/rover
+params_file = "rover"  # LRS/RoPeR/RIMFAX/rover
 
 # パラメータファイルの読み込み
 with open('params/'+params_file + '_params.json') as f:
@@ -98,43 +98,68 @@ with open(folder_name + '/params.txt', mode='w') as f:
 
 
 # プロットの作成
-plt.figure(figsize=(20, 10))
+plt.figure(figsize=(20, 20))
 plt.subplots_adjust(wspace=0.3)
+plt.subplots_adjust(hspace=0.3)
 
-plt.subplot(1, 2, 1)
+plt.subplot(2, 2, 1)
 plt.imshow(fd_array, cmap='coolwarm', origin='lower', aspect='auto',  vmin=0, vmax=1)
 #plt.colorbar()
 
 # タイトルの設定
-if params_file == 'rover':
-    plt.title('Case'+ str(params['case_number']) + ':' \
-        r"$P_t = $" + str(Pt) +'[W], '+  r'$G_t =$' + str(params['antenna_gain']) + '[dBi]', size = 24)
-else:
-    plt.title('Case'+ str(params['case_number']) + ':' \
-        r"$h = $" + str(altitude/1000) +'[km], '+  'Noise Level=' + str(params['noise_level']) + '[W]', size = 24)
+#if params_file == 'rover':
+plt.title('Case'+str(params['case_number'])+':Overview', size=24)
+#else:
+#    plt.title('Case'+ str(params['case_number']) + ':' \
+#        r"$h = $" + str(altitude/1000) +'[km], '+  'Noise Level=' + str(params['noise_level']) + '[W]', size = 24)
 plt.xlabel('Center Frequency [MHz]', size=20)  # 横軸のラベルを設定
 plt.ylabel('Tube Depth [m]', size=20)  # 縦軸のラベルを設定
 plt.tick_params(axis='both', labelsize=15)
 plt.grid()
 
-x_min = 1
-x_max = 60
-y_min = 10
-y_max = 100
 
-plt.subplot(1, 2, 2)
+x_list = np.linspace(freq_min, freq_max, 4)
+
+#====2枚目====
+plt.subplot(2, 2, 2)
 plt.imshow(fd_array, cmap='coolwarm', origin='lower', aspect='auto', vmin=0, vmax=1)
-#plt.colorbar()
 
 # タイトルの設定
-plt.title('Case'+ str(params['case_number']) +'(Detail)', size = 24)
-plt.xlim(x_min, x_max)
-plt.ylim(y_min, y_max)
+plt.title('Detail:' + str(x_list[0]) + '-' + str(x_list[1]-1) + 'MHz', size = 24)
+plt.xlim(x_list[0]-1, x_list[1]-1)
+#plt.ylim(y_list[0], y_list[1])
 plt.xlabel('Center Frequency [MHz]', size=20)  # 横軸のラベルを設定
 plt.ylabel('Tube Depth [m]', size=20)  # 縦軸のラベルを設定
 plt.tick_params(axis='both', labelsize=15)
 plt.grid()
 
+
+#====3枚目====
+plt.subplot(2, 2, 3)
+plt.imshow(fd_array, cmap='coolwarm', origin='lower', aspect='auto', vmin=0, vmax=1)
+
+# タイトルの設定
+plt.title('Detail:' + str(x_list[1]) + '-' + str(x_list[2]-1) + 'MHz', size = 24)
+plt.xlim(x_list[1]-1, x_list[2]-1)
+#plt.ylim(y_list[0], y_list[1])
+plt.xlabel('Center Frequency [MHz]', size=20)  # 横軸のラベルを設定
+plt.ylabel('Tube Depth [m]', size=20)  # 縦軸のラベルを設定
+plt.tick_params(axis='both', labelsize=15)
+plt.grid()
+
+
+#====4枚目====
+plt.subplot(2, 2, 4)
+plt.imshow(fd_array, cmap='coolwarm', origin='lower', aspect='auto', vmin=0, vmax=1)
+
+# タイトルの設定
+plt.title('Detail:' + str(x_list[2]) + '-' + str(x_list[3]-1) + 'MHz', size = 24)
+plt.xlim(x_list[2]-1, x_list[3]-1)
+#plt.ylim(y_list[0], y_list[1])
+plt.xlabel('Center Frequency [MHz]', size=20)  # 横軸のラベルを設定
+plt.ylabel('Tube Depth [m]', size=20)  # 縦軸のラベルを設定
+plt.tick_params(axis='both', labelsize=15)
+plt.grid()
 
 # プロットの保存
 plt.savefig(folder_name + '/detectabilitymap.png')
