@@ -39,90 +39,103 @@ altitude = params['altitude'] #探査機の高度[m]
 
 
 
+
+#　反射係数・透過係数
+Gamma_r = (np.sqrt(epsilon_r) - np.sqrt(epsilon_0))**2 / (np.sqrt(epsilon_r) + np.sqrt(epsilon_0))**2
+Gamma_t = 1-Gamma_r
+
+
+#周波数、深さ
+freq = np.arange(freq_min, freq_max, freq_step)
+depth = np.arange(depth_min, depth_max, depth_step)
+# Rとfのメッシュグリッドを生成
+f_mesh, R_mesh = np.meshgrid(freq, depth)
+fR_array = np.zeros((len(depth), len(freq)))
+
+# レーダー断面積を深さに応じて変化させる
+sigma1 = (R_mesh * 3/2) ** 2
+sigma2 = (depth * 3/2) ** 2
+
+
+# ノイズレベルの算出[dB]
+noise_dB = 10*np.log10(noise_level / Pt)
+
 # 受信パワーの計算
 def calc_Pr():  
-    #　反射係数・透過係数
-    Gamma_r = (np.sqrt(epsilon_r) - np.sqrt(epsilon_0))**2 / (np.sqrt(epsilon_r) + np.sqrt(epsilon_0))**2
-    Gamma_t = 1-Gamma_r
-    print('reflect:', Gamma_r)
-    print('through:',Gamma_t)
+    for index_f, f in enumerate(freq):
+        for index_d, d in enumerate(depth):
+            RCS = (d * 3/2)**2
+            # 受信強度の計算[dB]
+            Pr = 10.0 * np.log10(gain**2 * c**2 / (4.0 * pi)**3 / (d + altitude)**4 / (f*10**6)**2 * RCS) + \
+                10.0 * np.log10(Gamma_r * Gamma_t**4) - \
+                (0.091 * f * np.sqrt(epsilon_r) * loss_tangent) * 2.0 * d
+    
+            #　ノイズレベルに対する強度に変換
+            Pr_detectability = Pr - noise_dB
+
+            fR_array[index_d, index_f] = Pr_detectability
+
+    return fR_array
+calc_Pr()
 
 
-    #周波数、深さ
-    freq = np.arange(freq_min, freq_max, freq_step)
-    depth = np.arange(depth_min, depth_max, depth_step)
-    # Rとfのメッシュグリッドを生成
-    f_mesh, R_mesh = np.meshgrid(freq, depth)
-
-    # レーダー断面積を深さに応じて変化させる
-    sigma1 = (R_mesh * 3/2) ** 2
-    sigma2 = (depth * 3/2) ** 2
-
-
-    # ノイズレベルの算出[dB]
-    noise_dB = 10*np.log10(noise_level / Pt)
-
-
-    # 受信強度の計算[dB]
-    Pr = 10.0 * np.log10(gain**2 * c**2 / (4.0 * pi)**3 / (R_mesh + altitude)**4 / (f_mesh*10**6)**2 * sigma1) + \
-        10.0 * np.log10(Gamma_r * Gamma_t**4) - \
-        (0.091 * f_mesh * np.sqrt(epsilon_r) * loss_tangent) * 2.0 * R_mesh
-    #　ノイズレベルに対する強度に変換
-    Pr_detectability = Pr - noise_dB
-
-
-    # 特定の周波数で固定してdepth対dBのプロットを作る
-    def calc_Pr_certain_freq(certain_f):
-        Pr_freq = 10.0 * np.log10(gain**2 * c**2 / (4.0 * pi)**3 / (depth + altitude)**4 / (certain_f*10**6)**2 * sigma2) + \
-        10.0 * np.log10(Gamma_r * Gamma_t**4) - \
-        (0.091 * certain_f * np.sqrt(epsilon_r) * loss_tangent) * 2.0 * depth
-        Pr_freq_detectability = Pr_freq - noise_dB
+# 特定の周波数で固定してdepth対dBのプロットを作る
+def calc_Pr_certain_freq(certain_f):
+    Pr_freq = 10.0 * np.log10(gain**2 * c**2 / (4.0 * pi)**3 / (depth + altitude)**4 / (certain_f*10**6)**2 * sigma2) + \
+    10.0 * np.log10(Gamma_r * Gamma_t**4) - \
+    (0.091 * certain_f * np.sqrt(epsilon_r) * loss_tangent) * 2.0 * depth
+    Pr_freq_detectability = Pr_freq - noise_dB
         
-        return Pr_freq_detectability
+    return Pr_freq_detectability
     
-    if params_file == 'rover' :
-        Pr_1 = calc_Pr_certain_freq(5.0)
-        Pr_2 = calc_Pr_certain_freq(25.0)
-        Pr_3 = calc_Pr_certain_freq(50.0)
-        Pr_4 = calc_Pr_certain_freq(100.0)
-        Pr_5 = calc_Pr_certain_freq(200.0)
-        Pr_6 = calc_Pr_certain_freq(300.0)
+if params_file == 'rover' :
+    Pr_1 = calc_Pr_certain_freq(5.0)
+    Pr_2 = calc_Pr_certain_freq(25.0)
+    Pr_3 = calc_Pr_certain_freq(50.0)
+    Pr_4 = calc_Pr_certain_freq(100.0)
+    Pr_5 = calc_Pr_certain_freq(200.0)
+    Pr_6 = calc_Pr_certain_freq(300.0)
     
-    else:
-        Pr_1 = calc_Pr_certain_freq(5.0)
-        Pr_2 = calc_Pr_certain_freq(25.0)
-        Pr_3 = calc_Pr_certain_freq(50.0)
-        Pr_4 = calc_Pr_certain_freq(75.0)
-        Pr_5 = calc_Pr_certain_freq(100.0)
-        Pr_6 = calc_Pr_certain_freq(150.0)
+else:
+    Pr_1 = calc_Pr_certain_freq(5.0)
+    Pr_2 = calc_Pr_certain_freq(25.0)
+    Pr_3 = calc_Pr_certain_freq(50.0)
+    Pr_4 = calc_Pr_certain_freq(75.0)
+    Pr_5 = calc_Pr_certain_freq(100.0)
+    Pr_6 = calc_Pr_certain_freq(150.0)
 
 
+# 計算の実行
+calc_Pr()
+calc_Pr_certain_freq
 
-    # アウトプットを保存するフォルダを作成
-    if params_file == 'rover' or 'LRS':
-        folder_name = "output_recieved_power/"+params_file + '/Case' + str(params['case_number'])
+# アウトプットするフォルダーのパスを作成
+if params_file == 'rover' or 'LRS':
+    folder_name = "output_recieved_power/"+params_file + '/Case' + str(params['case_number'])
 
-    else:
-        folder_name = "output_recieved_power/"+params_file + \
-        '_noise'+str(noise_dB) + "_h"+str(altitude)
+else:
+    folder_name = "output_recieved_power/"+params_file + \
+    '_noise'+str(noise_dB) + "_h"+str(altitude)
 
-
-    if not os.path.exists(folder_name):
-        os.makedirs(folder_name)
+# アウトプットを保存するフォルダを作成
+if not os.path.exists(folder_name):
+    os.makedirs(folder_name)
 
     
-    # パラメータ情報を保存
-    with open(folder_name + "/params.json", "w") as f:
-        json.dump(params, f)
+# パラメータ情報を保存
+#with open(folder_name + "/params.json", "w") as f:
+#    json.dump(params, f)
 
 
-    # パラメータの書き出し（txt形式）
-    with open(folder_name + '/params.txt', mode='w') as f:
-        for key, value in params.items():
-            f.write(str(key) + ": " + str(value) + "\n")
+# パラメータの書き出し（txt形式）
+with open(folder_name + '/params.txt', mode='w') as f:
+    for key, value in params.items():
+        f.write(str(key) + ": " + str(value) + "\n")
     
 
-    # レーダー断面積のプロット
+
+# レーダー断面積のプロット
+def plot_RCS():
     plt.figure(figsize=(10, 7))
     plt.plot(depth, sigma2)
 
@@ -135,14 +148,18 @@ def calc_Pr():
     plt.savefig('output_recieved_power/radar_cross_section.png')
     plt.show()
     
+#plot_RCS()
 
 
-    # カラーマップをプロット
+    # プロットの作成
+def plot():
     plt.figure(figsize=(18, 7))
+    plt.subplots_adjust(wspace=0.2)
 
 
     plt.subplot(1, 2, 1)
-    plt.pcolormesh(f_mesh, R_mesh, Pr_detectability, cmap='coolwarm', shading='auto', norm=Normalize(vmin= -50, vmax=50))
+    #plt.pcolormesh(f_mesh, R_mesh, calc_Pr, cmap='coolwarm', shading='auto', norm=Normalize(vmin= -50, vmax=50)
+    plt.imshow(fR_array, cmap='coolwarm', origin='lower', aspect='auto', vmin=-50, vmax=50)
 
     if params_file == 'rover':
         plt.title('Case'+ str(params['case_number']) + ':' \
@@ -155,7 +172,6 @@ def calc_Pr():
     cbar = plt.colorbar(label='Received power [dB]')
     cbar.ax.tick_params(labelsize=16)
     plt.tick_params(axis='both', labelsize=15)
-
 
 
     plt.subplot(1, 2, 2)
@@ -183,8 +199,6 @@ def calc_Pr():
     plt.grid()
     
     plt.savefig(folder_name + "/detectability_map.png")
-
-    plt.subplots_adjust(wspace=0.2)
     plt.show()
 
-calc_Pr()
+plot()

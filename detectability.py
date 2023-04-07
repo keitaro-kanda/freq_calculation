@@ -59,14 +59,17 @@ fd_array = np.zeros((len(depth), len(freq)))
 def calc_detectability():
     for index_f, f in enumerate(freq):
         for index_d, d in enumerate(depth):
+            # エコー強度計算
             RCS = (d * 3/2)**2
             Pr = 10.0 * np.log10(gain**2 * c**2 / (4.0 * pi)**3 / (d + altitude)**4 / (f*10**6)**2 * RCS) + \
                 10.0 * np.log10(Gamma_r * Gamma_t**4) - \
-                (0.091 * f * np.sqrt(epsilon_0) * loss_tangent) * 2.0 * d
+                (0.091 * f * np.sqrt(epsilon_r) * loss_tangent) * 2.0 * d
             Pr_detectability = Pr - noise_dB
             
+            # 分解能計算
             dR = c / (2*np.sqrt(epsilon_r) * f * 0.5 * 10**6)
 
+            # 検出可能性の判定
             if Pr_detectability > 0 and dR <= d/6:
                 fd_array[index_d, index_f] = 1
             else:
@@ -114,9 +117,9 @@ plt.ylabel('Tube Depth [m]', size=20)  # 縦軸のラベルを設定
 plt.tick_params(axis='both', labelsize=15)
 plt.grid()
 
-x_min = 1
-x_max = 90
-y_min = 10
+x_min = 145
+x_max = 300
+y_min = 40
 y_max = 100
 
 plt.subplot(1, 2, 2)
