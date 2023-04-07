@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 # 選択するパラメータファイルの指定
-params_file = "LRS"  # LRS/RoPeR/RIMFAX/rover
+params_file = "rover"  # LRS/RoPeR/RIMFAX/rover
 
 # パラメータファイルの読み込み
 with open('params/'+params_file + '_params.json') as f:
@@ -67,7 +67,7 @@ def calc_detectability():
             
             dR = c / (2*np.sqrt(epsilon_r) * f * 0.5 * 10**6)
 
-            if Pr > noise_dB and dR <= d/6:
+            if Pr_detectability > 0 and dR <= d/6:
                 fd_array[index_d, index_f] = 1
             else:
                 fd_array[index_d, index_f] = 0
