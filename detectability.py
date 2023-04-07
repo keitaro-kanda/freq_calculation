@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 # 選択するパラメータファイルの指定
-params_file = "rover"  # LRS/RoPeR/RIMFAX/rover
+params_file = "LRS"  # LRS/RoPeR/RIMFAX/rover
 
 # パラメータファイルの読み込み
 with open('params/'+params_file + '_params.json') as f:
@@ -117,9 +117,9 @@ plt.ylabel('Tube Depth [m]', size=20)  # 縦軸のラベルを設定
 plt.tick_params(axis='both', labelsize=15)
 plt.grid()
 
-x_min = 145
-x_max = 300
-y_min = 40
+x_min = 1
+x_max = 60
+y_min = 10
 y_max = 100
 
 plt.subplot(1, 2, 2)
