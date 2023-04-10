@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 # 選択するパラメータファイルの指定
-params_file = "LRS"  # LRS/RoPeR/RIMFAX/rover
+params_file = "rover"  # LRS/RoPeR/RIMFAX/rover
 
 # パラメータファイルの読み込み
 with open('params/'+params_file + '_params.json') as f:
@@ -103,12 +103,12 @@ plt.subplots_adjust(wspace=0.3)
 plt.subplots_adjust(hspace=0.3)
 
 plt.subplot(2, 2, 1)
-plt.imshow(fd_array, cmap='coolwarm', origin='lower', aspect='auto',  vmin=0, vmax=1)
+plt.imshow(fd_array, origin='lower', cmap='coolwarm', aspect='auto',  vmin=0, vmax=1)
 #plt.colorbar()
 
 # タイトルの設定
 #if params_file == 'rover':
-plt.title('Case'+str(params['case_number'])+':Overview', size=24)
+plt.title('(a) Case'+str(params['case_number'])+':Overview', size=24)
 #else:
 #    plt.title('Case'+ str(params['case_number']) + ':' \
 #        r"$h = $" + str(altitude/1000) +'[km], '+  'Noise Level=' + str(params['noise_level']) + '[W]', size = 24)
@@ -125,7 +125,7 @@ plt.subplot(2, 2, 2)
 plt.imshow(fd_array, cmap='coolwarm', origin='lower', aspect='auto', vmin=0, vmax=1)
 
 # タイトルの設定
-plt.title('Detail:' + str(x_list[0]) + '-' + str(x_list[1]-1) + 'MHz', size = 24)
+plt.title('(b) Detail:' + str(x_list[0]) + '-' + str(x_list[1]-1) + 'MHz', size = 24)
 plt.xlim(x_list[0]-1, x_list[1]-1)
 #plt.ylim(y_list[0], y_list[1])
 plt.xlabel('Center Frequency [MHz]', size=20)  # 横軸のラベルを設定
@@ -139,7 +139,7 @@ plt.subplot(2, 2, 3)
 plt.imshow(fd_array, cmap='coolwarm', origin='lower', aspect='auto', vmin=0, vmax=1)
 
 # タイトルの設定
-plt.title('Detail:' + str(x_list[1]) + '-' + str(x_list[2]-1) + 'MHz', size = 24)
+plt.title('(c) Detail:' + str(x_list[1]) + '-' + str(x_list[2]-1) + 'MHz', size = 24)
 plt.xlim(x_list[1]-1, x_list[2]-1)
 #plt.ylim(y_list[0], y_list[1])
 plt.xlabel('Center Frequency [MHz]', size=20)  # 横軸のラベルを設定
@@ -153,7 +153,7 @@ plt.subplot(2, 2, 4)
 plt.imshow(fd_array, cmap='coolwarm', origin='lower', aspect='auto', vmin=0, vmax=1)
 
 # タイトルの設定
-plt.title('Detail:' + str(x_list[2]) + '-' + str(x_list[3]-1) + 'MHz', size = 24)
+plt.title('(d) Detail:' + str(x_list[2]) + '-' + str(x_list[3]-1) + 'MHz', size = 24)
 plt.xlim(x_list[2]-1, x_list[3]-1)
 #plt.ylim(y_list[0], y_list[1])
 plt.xlabel('Center Frequency [MHz]', size=20)  # 横軸のラベルを設定

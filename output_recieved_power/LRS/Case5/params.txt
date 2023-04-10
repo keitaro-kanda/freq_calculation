@@ -12,4 +12,4 @@ frequency_step: 1
 min_depth: 1.0
 max_depth: 101.0
 depth_step: 1.0
-altitude: 100000.0
+altitude: 50000.0

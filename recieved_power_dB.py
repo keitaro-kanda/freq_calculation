@@ -6,7 +6,7 @@ import numpy as np
 from matplotlib.colors import Normalize
 
 # 選択するパラメータファイルの指定
-params_file = "LRS"  # LRS/RoPeR/RIMFAX/rover
+params_file = "rover"  # LRS/RoPeR/RIMFAX/rover
 
 # パラメータファイルの読み込み
 with open('params/'+params_file + '_params.json') as f:
@@ -162,10 +162,10 @@ def plot():
     plt.imshow(fR_array, cmap='coolwarm', origin='lower', aspect='auto', vmin=-50, vmax=50)
 
     if params_file == 'rover':
-        plt.title('Case'+ str(params['case_number']) + ':' \
+        plt.title('(a) Case'+ str(params['case_number']) + ':' \
             r"$P_t = $" + str(Pt) +'[W], '+  r'$G_t =$' + str(params['antenna_gain']) + '[dBi]', size = 24)
     else:
-        plt.title('Case'+ str(params['case_number']) + ':' \
+        plt.title('(a) Case'+ str(params['case_number']) + ':' \
             r"$h = $" + str(altitude/1000) +'[km], '+  'Noise Level=' + str(params['noise_level']) + '[W]', size = 24)
     plt.xlabel('Frequency [MHz]', size = 20)
     plt.ylabel('Depth [m]', size = 20)
@@ -191,7 +191,7 @@ def plot():
         plt.plot(depth, Pr_5, label='100 MHz')
         plt.plot(depth, Pr_6, label='150 MHz')
 
-    plt.title("Received Power at each Frequecy", size = 24)
+    plt.title("(b) Received Power at each Frequecy", size = 24)
     plt.xlabel('Depth [m]', size=20)
     plt.ylabel('Received Power [dB]', size=20)
     #plt.yscale('log')
