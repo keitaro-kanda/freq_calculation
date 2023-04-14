@@ -1,5 +1,5 @@
-import numpy as np
 import matplotlib.pyplot as plt
+import numpy as np
 import sympy
 
 
@@ -9,7 +9,7 @@ def bibunn_keisan():
     d, h, G_t, c, f, Gamma_r, Gamma_t, eps_r, sigma = sympy.symbols('d h G_t c f Gamma_r Gamma_t eps_r sigma')
     Pr = 10 * sympy.log(G_t**2 * c**2 / ((4 * sympy.pi)**3 * (d + h)**4 * f**2) * (3/2*d)**2, 10) \
         + 10 * sympy.log(Gamma_r * Gamma_t**4, 10) \
-        - (0.091 * f * sympy.sqrt(eps_r) * sympy.tan(sigma)) * 2 * d
+        - (0.091 * f * sympy.sqrt(eps_r) * sympy.tan(sigma)) * 2 * d/2
 
     # Prをdで微分
     dPr = sympy.diff(Pr, d)
@@ -47,7 +47,7 @@ for i in [1, 2, 3]:
             altitude=100
         h = altitude * 1000
 
-        ddPr = 20 * ((-2/(d+h)) + (1/d)) / np.log(10) - f * 3.64e-3
+        ddPr = 20 * ((-2/(d+h)) + (1/d)) / np.log(10) - f * 1.82e-3
         plt.subplot(3, 1, i)
         plt.plot(d, ddPr, label=f"f={f}MHz")
         
