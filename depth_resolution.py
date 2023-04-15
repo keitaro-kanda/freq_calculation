@@ -85,7 +85,7 @@ def calc_resolution():
 
     plt.show()
 
-#calc_resolution()
+calc_resolution()
 
 
 def calc_resolution_detectability():
@@ -100,7 +100,6 @@ def calc_resolution_detectability():
     # 検出可能なチューブの最小高さ
     tube_h1 = dR1 * 3
     tube_h2 = dR2 * 3
-
 
     #描画
     plt.figure(figsize=(25, 16))
@@ -175,4 +174,4 @@ def calc_resolution_detectability():
     plt.show()
 
 
-calc_resolution_detectability()
+#calc_resolution_detectability()
