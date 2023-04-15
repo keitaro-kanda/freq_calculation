@@ -50,14 +50,14 @@ Gamma_t = 1-Gamma_r
 #周波数、深さ
 width = np.arange(width_min, width_max, width_step)
 depth = np.arange(depth_min, depth_max, depth_step)
-#print(width)
-#print(depth)
+height = width/3
 
 # ノイズレベルの算出[dB]
 noise_dB = 10*np.log10(noise_level / Pt)
 
 
 fw_array = np.zeros((len(depth), len(width)))
+print(len(depth), len(width))
 
 # 受信強度の計算[dB]
 def calc_detectability():
@@ -76,7 +76,7 @@ def calc_detectability():
                 
 
             # 検出可能性の判定
-            if d < h+1:
+            if d < h:
                 fw_array[index_d, index_w] = 0
             elif Pr_detectability > 0 and dR <= h/dR_need:
                 fw_array[index_d, index_w] = 1
@@ -86,7 +86,6 @@ def calc_detectability():
     return fw_array
 
 calc_detectability()
-
 
 
 # アウトプットを保存するフォルダを作成
@@ -107,7 +106,8 @@ plt.figure(figsize=(20, 10))
 plt.subplots_adjust(wspace=0.3)
 plt.subplots_adjust(hspace=0.3)
 
-plt.imshow(fw_array, origin='lower', cmap='coolwarm', aspect='auto',  vmin=-1, vmax=1)
+plt.plot(width, height, 'k', label='tube height h')
+plt.imshow(fw_array, origin='lower', cmap='coolwarm', aspect='equal',  vmin=-1, vmax=1)
 #plt.colorbar()
 
 # タイトルの設定
@@ -119,8 +119,11 @@ plt.xlabel('Tube Width [m]', size=20)  # 横軸のラベルを設定
 plt.ylabel('Tube Depth [m]', size=20)  # 縦軸のラベルを設定
 plt.xticks(np.arange(len(width)), width)
 plt.yticks(np.arange(len(depth)), depth)
+#plt.xlim(0, 20)
+#plt.ylim(0, 10)
 plt.tick_params(axis='both', labelsize=15)
 plt.grid()
+plt.legend(fontsize=16)
 
 
 # プロットの保存
