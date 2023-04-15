@@ -42,7 +42,8 @@ for w in width_array:
 
     altitude = params['altitude'] #探査機の高度[m]
 
-
+     # 必要分解能
+    dR_need = 3
 
     #　反射係数・透過係数
     Gamma_r = (np.sqrt(epsilon_r) - np.sqrt(epsilon_0))**2 / (np.sqrt(epsilon_r) + np.sqrt(epsilon_0))**2
@@ -79,11 +80,12 @@ for w in width_array:
                     dR = c / (2*np.sqrt(epsilon_0) * f * 0.2 * 10**6)
                 else:
                     dR = c / (2*np.sqrt(epsilon_0) * f * 0.5 * 10**6)
+                
 
                 # 検出可能性の判定
                 if d < h+1:
                     fd_array[index_d, index_f] = 0
-                elif Pr_detectability > 0 and dR <= h/3:
+                elif Pr_detectability > 0 and dR <= h/dR_need:
                     fd_array[index_d, index_f] = 1
                 else:
                     fd_array[index_d, index_f] = -1
@@ -96,7 +98,7 @@ for w in width_array:
 
     # アウトプットを保存するフォルダを作成
     if params_file == 'rover' or 'LRS':
-        folder_name = "output_detectability/"+params_file + '/RCS' + str(RCS)
+        folder_name = "output_detectability/"+params_file + '_dRneed'+str(dR_need) + '/RCS' + str(RCS)
     else:
         folder_name = "output_detectability/"+params_file + \
         '_noise'+str(noise_dB) + "_h"+str(altitude)

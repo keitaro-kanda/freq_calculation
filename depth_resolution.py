@@ -25,7 +25,7 @@ def calc_resolution():
     # ----1枚目----
     plt.subplot(2, 3, 1)
     plt.plot(f0, dR1, label=r'$\Delta f = 0.5 f_c$')
-    plt.plot(f0, dR2, label=r'$\Delta f = 0.2 f_c$')
+    #plt.plot(f0, dR2, label=r'$\Delta f = 0.2 f_c$')
 
     plt.title(' (a) Overview', fontsize=24)
     plt.xlabel('Center Frequency [MHz]', fontsize=20)
@@ -39,7 +39,7 @@ def calc_resolution():
     # ----2枚目----
     plt.subplot(2, 3, 4)
     plt.plot(f0, dR1, label=r'$\Delta f = 0.5 f_c$')
-    plt.plot(f0, dR2, label=r'$\Delta f = 0.2 f_c$')
+    #plt.plot(f0, dR2, label=r'$\Delta f = 0.2 f_c$')
 
     plt.title('(b) Detail of 1-10 MHz', fontsize=24)
     plt.xlabel('Center Frequency [MHz]', fontsize=20)
@@ -53,7 +53,7 @@ def calc_resolution():
     # ----3枚目----
     plt.subplot(2, 3, 5)
     plt.plot(f0, dR1, label=r'$\Delta f = 0.5 f_c$')
-    plt.plot(f0, dR2, label=r'$\Delta f = 0.2 f_c$')
+    #plt.plot(f0, dR2, label=r'$\Delta f = 0.2 f_c$')
 
     plt.title('(c) Detail of 10-60 MHz', fontsize=24)
     plt.xlabel('Center Frequency [MHz]', fontsize=20)
@@ -68,7 +68,7 @@ def calc_resolution():
     # ----4枚目----
     plt.subplot(2, 3, 6)
     plt.plot(f0, dR1, label=r'$\Delta f = 0.5 f_c$')
-    plt.plot(f0, dR2, label=r'$\Delta f = 0.2 f_c$')
+    #plt.plot(f0, dR2, label=r'$\Delta f = 0.2 f_c$')
 
     plt.title('(d) Detail of 60-300 MHz', fontsize=24)
     plt.xlabel('Center Frequency [MHz]', fontsize=20)
@@ -109,7 +109,7 @@ def calc_resolution_detectability():
     # ----1枚目----
     plt.subplot(2, 3, 1)
     plt.plot(f0, tube_h1, label=r'$\Delta f = 0.5 f_c$')
-    plt.plot(f0, tube_h2, label=r'$\Delta f = 0.2 f_c$')
+    #plt.plot(f0, tube_h2, label=r'$\Delta f = 0.2 f_c$')
     #plt.hlines(50, 0, 300, colors='r')
 
     plt.title(' (a) Overview', fontsize=24)
@@ -124,7 +124,7 @@ def calc_resolution_detectability():
     # ----2枚目----
     plt.subplot(2, 3, 4)
     plt.plot(f0, tube_h1, label=r'$\Delta f = 0.5 f_c$')
-    plt.plot(f0, tube_h2, label=r'$\Delta f = 0.2 f_c$')
+    #plt.plot(f0, tube_h2, label=r'$\Delta f = 0.2 f_c$')
     #plt.hlines(50, 0, 300, colors='r')
 
     plt.title('(b) Detail of 1-10 MHz', fontsize=24)
@@ -139,7 +139,7 @@ def calc_resolution_detectability():
     # ----3枚目----
     plt.subplot(2, 3, 5)
     plt.plot(f0, tube_h1, label=r'$\Delta f = 0.5 f_c$')
-    plt.plot(f0, tube_h2, label=r'$\Delta f = 0.2 f_c$')
+    #plt.plot(f0, tube_h2, label=r'$\Delta f = 0.2 f_c$')
     #plt.hlines(50, 0, 300, colors='r')
 
     plt.title('(c) Detail of 10-60 MHz', fontsize=24)
@@ -155,7 +155,7 @@ def calc_resolution_detectability():
     # ----4枚目----
     plt.subplot(2, 3, 6)
     plt.plot(f0, tube_h1, label=r'$\Delta f = 0.5 f_c$')
-    plt.plot(f0, tube_h2, label=r'$\Delta f = 0.2 f_c$')
+    #plt.plot(f0, tube_h2, label=r'$\Delta f = 0.2 f_c$')
 
     plt.title('(d) Detail of 60-300 MHz', fontsize=24)
     plt.xlabel('Center Frequency [MHz]', fontsize=20)
@@ -174,4 +174,4 @@ def calc_resolution_detectability():
     plt.show()
 
 
-#calc_resolution_detectability()
+calc_resolution_detectability()
