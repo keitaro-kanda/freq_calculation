@@ -23,7 +23,7 @@ epsilon_r = params['epsilon_r']  # 地面の比誘電率
 epsilon_0 = params['epsilon_0']  # 真空雨の誘電率　
 loss_tangent = params['loss_tangent']  # 損失角（tan）
 #width = params['tube_width'] # チューブの幅
-width_array = [100, 200, 250]
+width_array = [500, 1000, 1200]
 for w in width_array:
     width = w
     RCS = width**2 # レーダー断面積
