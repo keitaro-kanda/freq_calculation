@@ -85,7 +85,7 @@ def calc_resolution():
 
     plt.show()
 
-calc_resolution()
+#calc_resolution()
 
 
 def calc_resolution_detectability():
@@ -108,7 +108,8 @@ def calc_resolution_detectability():
 
     # ----1枚目----
     plt.subplot(2, 3, 1)
-    plt.plot(f0, tube_h1, label=r'$\Delta f = 0.5 f_c$')
+    plt.plot(f0, dR1, label=r'$\Delta R$')
+    plt.plot(f0, tube_h1, label='detectable tube height')
     #plt.plot(f0, tube_h2, label=r'$\Delta f = 0.2 f_c$')
     #plt.hlines(50, 0, 300, colors='r')
 
@@ -123,7 +124,8 @@ def calc_resolution_detectability():
 
     # ----2枚目----
     plt.subplot(2, 3, 4)
-    plt.plot(f0, tube_h1, label=r'$\Delta f = 0.5 f_c$')
+    plt.plot(f0, dR1, label=r'$\Delta R$')
+    plt.plot(f0, tube_h1, label='detectable tube height')
     #plt.plot(f0, tube_h2, label=r'$\Delta f = 0.2 f_c$')
     #plt.hlines(50, 0, 300, colors='r')
 
@@ -138,7 +140,8 @@ def calc_resolution_detectability():
 
     # ----3枚目----
     plt.subplot(2, 3, 5)
-    plt.plot(f0, tube_h1, label=r'$\Delta f = 0.5 f_c$')
+    plt.plot(f0, dR1, label=r'$\Delta R$')
+    plt.plot(f0, tube_h1, label='detectable tube height')
     #plt.plot(f0, tube_h2, label=r'$\Delta f = 0.2 f_c$')
     #plt.hlines(50, 0, 300, colors='r')
 
@@ -147,14 +150,15 @@ def calc_resolution_detectability():
     plt.ylabel('Minimum Detactable Tube Height [m]', fontsize=20)
     plt.tick_params(labelsize=20)
     plt.xlim(10, 60)
-    plt.ylim(0, 250)
+    plt.ylim(0, 100)
     plt.grid()
     plt.legend(fontsize='20')
 
 
     # ----4枚目----
     plt.subplot(2, 3, 6)
-    plt.plot(f0, tube_h1, label=r'$\Delta f = 0.5 f_c$')
+    plt.plot(f0, dR1, label=r'$\Delta R$')
+    plt.plot(f0, tube_h1, label='detectable tube height')
     #plt.plot(f0, tube_h2, label=r'$\Delta f = 0.2 f_c$')
 
     plt.title('(d) Detail of 60-300 MHz', fontsize=24)
@@ -162,7 +166,7 @@ def calc_resolution_detectability():
     plt.ylabel('Minimum Detactable Tube Height [m]', fontsize=20)
     plt.tick_params(labelsize=20)
     plt.xlim(60, 300)
-    plt.ylim(0, 40)
+    plt.ylim(0, 20)
     plt.grid()
     
     plt.legend(fontsize='20')
