@@ -43,7 +43,7 @@ for w in width_array:
     altitude = params['altitude'] #探査機の高度[m]
 
     # 必要分解能
-    dR_need = 2
+    dR_need = 3
 
     #　反射係数・透過係数
     Gamma_r = (np.sqrt(epsilon_r) - np.sqrt(epsilon_0))**2 / (np.sqrt(epsilon_r) + np.sqrt(epsilon_0))**2
