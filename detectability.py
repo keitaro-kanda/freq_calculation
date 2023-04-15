@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 # 選択するパラメータファイルの指定
-params_file = "LRS"  # LRS/RoPeR/RIMFAX/rover
+params_file = "rover"  # LRS/RoPeR/RIMFAX/rover
 
 # パラメータファイルの読み込み
 with open('params/'+params_file + '_params.json') as f:
@@ -22,7 +22,7 @@ epsilon_r = params['epsilon_r']  # 地面の比誘電率
 epsilon_0 = params['epsilon_0']  # 真空の誘電率　
 loss_tangent = params['loss_tangent']  # 損失角（tan）
 #width = params['tube_width'] # チューブ幅
-width_array = [100]
+width_array = [3, 10, 15, 30, 50, 60]
 for w in width_array:
     width = w
     RCS = width**2 # レーダー断面積
@@ -42,8 +42,8 @@ for w in width_array:
 
     altitude = params['altitude'] #探査機の高度[m]
 
-     # 必要分解能
-    dR_need = 3
+    # 必要分解能
+    dR_need = 2
 
     #　反射係数・透過係数
     Gamma_r = (np.sqrt(epsilon_r) - np.sqrt(epsilon_0))**2 / (np.sqrt(epsilon_r) + np.sqrt(epsilon_0))**2
