@@ -50,6 +50,8 @@ Gamma_t = 1-Gamma_r
 #周波数、深さ
 width = np.arange(width_min, width_max, width_step)
 depth = np.arange(depth_min, depth_max, depth_step)
+#print(width)
+#print(depth)
 
 # ノイズレベルの算出[dB]
 noise_dB = 10*np.log10(noise_level / Pt)
@@ -80,7 +82,7 @@ def calc_detectability():
                 fw_array[index_d, index_w] = 1
             else:
                 fw_array[index_d, index_w] = -1
-                
+
     return fw_array
 
 calc_detectability()
