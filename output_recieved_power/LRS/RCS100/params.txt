@@ -3,7 +3,7 @@ case_number: 1
 epsilon_r: 4.0
 epsilon_0: 1.0
 loss_tangent: 0.01
-radar_cross_section: 100
+radar_cross_section: 10
 antenna_gain: 2.15
 transmit_power: 800
 noise_level: 1e-12
