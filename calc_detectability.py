@@ -77,6 +77,8 @@ def calc_detectability():
             # 検出可能性の判定
             if d < h:
                 fw_array[index_d, index_w] = 0
+            elif d-h < 75:
+                fw_array[index_d, index_w] = -1
             elif Pr_detectability > 0 and dR <= h/dR_need:
                 fw_array[index_d, index_w] = 1
             else:
@@ -110,7 +112,7 @@ plt.imshow(fw_array, origin='lower', cmap='coolwarm', aspect='equal',  vmin=-1, 
 #plt.colorbar()
 
 # タイトルの設定
-plt.title('Frequency: 4-6 MHz', size=24)
+plt.title('Detectable Tubes by LRS, meet [Kaku+,2017] second interpretation ', size=24)
 #else:
 #    plt.title('Case'+ str(params['case_number']) + ':' \
 #        r"$h = $" + str(altitude/1000) +'[km], '+  'Noise Level=' + str(params['noise_level']) + '[W]', size = 24)
