@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 # 選択するパラメータファイルの指定
-params_file = "LRS"  # LRS/RoPeR/RIMFAX/rover
+params_file = "orbiter"  # LRS/RoPeR/RIMFAX/rover
 
 # パラメータファイルの読み込み
 with open('params/'+params_file + '_params.json') as f:
@@ -17,25 +17,24 @@ with open('params/'+params_file + '_params.json') as f:
 c = params['speed_of_light'] #真空中の光速[m/s]
 pi = np.pi  # 円周率π
 
-#sigma = params['radar_cross_section']  # レーダー断面積[m^2]
 epsilon_r = params['epsilon_r']  # 地面の比誘電率
 epsilon_0 = params['epsilon_0']  # 真空の誘電率　
-loss_tangent = params['loss_tangent']  # 損失角（tan）
-#width = params['tube_width'] # チューブ幅
+
+loss_tangent = params['loss_tangent']  # losstangent
 gain = 10 ** (params['antenna_gain']/10) # アンテナゲイン[dBi]
 Pt = params['transmit_power'] # 放射パワー[W]
 noise_level = params['noise_level'] # ノイズレベル[W]
 
-f = 5 # 周波数 [MHz]
+frequency = params['center_frequency'] # 中心周波数
 
-width_min = 0 # チューブ幅の最小値[m]
-width_max = 2001 # チューブ幅の最大値[m]
-width_step = 100 # チューブ幅のステップ
+width_min = params['width_min'] # チューブ幅の最小値[m]
+width_max = params['width_max'] # チューブ幅の最大値[m]
+width_step = params['width_step'] # チューブ幅のステップ
 
 
-depth_min = 0 # 深さの最小値[m]
-depth_max = 1001 # 深さの最大値[m]
-depth_step = 100 # 深さの刻み幅[m]
+roof_min = params['roof_min'] # 深さの最小値[m]
+roof_max = params['roof_max'] # 深さの最大値[m]
+depth_step = params['roof_step'] # 深さの刻み幅[m]
 
 altitude = params['altitude'] #探査機の高度[m]
 

@@ -6,7 +6,14 @@
     "epsilon_r": 4.0,
     "epsilon_0": 1.0,
     "loss_tangent": 0.01,
-    "radar_cross_section": 10,
+
+    "width_min": 1,
+    "width_max": 60,
+    "width_step": 5,
+    
+    "roof__min": 1,
+    "roof__max": 50, 
+    "roof_step": 1,
 
     "antenna_gain": 2.15,
     "transmit_power": 800,
