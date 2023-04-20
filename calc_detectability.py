@@ -71,8 +71,9 @@ def calc_detectability():
                 10.0 * np.log10(Gamma_r * Gamma_t**4) - \
                 (0.091 * frequency * np.sqrt(epsilon_r) * loss_tangent) * 2.0 * r
             Pr_detectability = Pr - noise_dB
-                
-            dR = c / (2*np.sqrt(epsilon_0) * 2 * 10**6)
+            
+            freq_width = 0.5 * frequency
+            dR = c / (2*np.sqrt(epsilon_0) * freq_width * 10**6)
                 
 
             # 検出可能性の判定
@@ -84,7 +85,7 @@ def calc_detectability():
     return fw_array
 
 calc_detectability()
-print(fw_array)
+
 
 # アウトプットを保存するフォルダを作成
 folder_name = "output_detectability/LRS_only"
@@ -100,28 +101,21 @@ with open(folder_name + '/params.txt', mode='w') as f:
 
 
 # プロットの作成
-plt.figure(figsize=(20, 10))
+plt.figure(figsize=(12, 10))
 plt.subplots_adjust(wspace=0.3)
 plt.subplots_adjust(hspace=0.3)
 
-plt.plot(width, roof, 'k', label='tube height h')
 plt.imshow(fw_array, origin='lower', cmap='coolwarm', aspect='equal',  vmin=-1, vmax=1)
-plt.colorbar()
+#plt.colorbar()
 
 # タイトルの設定
 plt.title('Cese'+str(case_num), size=24)
-#else:
-#    plt.title('Case'+ str(params['case_number']) + ':' \
-#        r"$h = $" + str(altitude/1000) +'[km], '+  'Noise Level=' + str(params['noise_level']) + '[W]', size = 24)
 plt.xlabel('Tube Width [m]', size=20)  # 横軸のラベルを設定
-plt.ylabel('Tube Depth [m]', size=20)  # 縦軸のラベルを設定
-#plt.xticks(np.arange(len(width)), width)
-#plt.yticks(np.arange(len(roof)), roof)
-#plt.xlim(0, 20)
-#plt.ylim(0, 10)
+plt.ylabel('Roof Hight [m]', size=20)  # 縦軸のラベルを設定
+plt.xticks(np.arange(0, len(width), 2), width[::2])
+plt.yticks(np.arange(0, len(roof), 2), width[::2])
 plt.tick_params(axis='both', labelsize=15)
 plt.grid()
-plt.legend(fontsize=16)
 
 
 # プロットの保存
