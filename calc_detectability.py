@@ -5,14 +5,15 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 # 選択するパラメータファイルの指定
-params_file = "orbiter"  # LRS/RoPeR/RIMFAX/rover
+params_file = "rover2"  # orbiter/rover2
 
 # パラメータファイルの読み込み
 with open('params/'+params_file + '_params.json') as f:
     params = json.load(f)
 
 
-
+# Cese Number
+case_num = params['case_number']
 # 変数の定義
 c = params['speed_of_light'] #真空中の光速[m/s]
 pi = np.pi  # 円周率π
@@ -34,12 +35,12 @@ width_step = params['width_step'] # チューブ幅のステップ
 
 roof_min = params['roof_min'] # 深さの最小値[m]
 roof_max = params['roof_max'] # 深さの最大値[m]
-depth_step = params['roof_step'] # 深さの刻み幅[m]
+roof_step = params['roof_step'] # 深さの刻み幅[m]
 
 altitude = params['altitude'] #探査機の高度[m]
 
 # 必要分解能
-dR_need = 3
+#dR_need = 3
 
 #　反射係数・透過係数
 Gamma_r = (np.sqrt(epsilon_r) - np.sqrt(epsilon_0))**2 / (np.sqrt(epsilon_r) + np.sqrt(epsilon_0))**2
@@ -48,46 +49,42 @@ Gamma_t = 1-Gamma_r
 
 #周波数、深さ
 width = np.arange(width_min, width_max, width_step)
-depth = np.arange(depth_min, depth_max, depth_step)
-height = width/3
+roof = np.arange(roof_min, roof_max, roof_step)
 
 # ノイズレベルの算出[dB]
 noise_dB = 10*np.log10(noise_level / Pt)
 
 
-fw_array = np.zeros((len(depth), len(width)))
-print(len(depth), len(width))
+# fw_arrayの初期化
+fw_array = np.zeros((len(roof), len(width)))
+
 
 # 受信強度の計算[dB]
 def calc_detectability():
     for index_w, w in enumerate(width):
-        for index_d, d in enumerate(depth):
+        for index_r, r in enumerate(roof):
             h = w/3
             RCS = w**2
             
             # エコー強度計算
-            Pr = 10.0 * np.log10(gain**2 * c**2 / (4.0 * pi)**3 / (d + altitude)**4 / (f*10**6)**2 * RCS) + \
+            Pr = 10.0 * np.log10(gain**2 * c**2 / (4.0 * pi)**3 / ((r + h) + altitude)**4 / (frequency*10**6)**2 * RCS) + \
                 10.0 * np.log10(Gamma_r * Gamma_t**4) - \
-                (0.091 * f * np.sqrt(epsilon_r) * loss_tangent) * 2.0 * (d - h)
+                (0.091 * frequency * np.sqrt(epsilon_r) * loss_tangent) * 2.0 * r
             Pr_detectability = Pr - noise_dB
                 
             dR = c / (2*np.sqrt(epsilon_0) * 2 * 10**6)
                 
 
             # 検出可能性の判定
-            if d < h:
-                fw_array[index_d, index_w] = 0
-            elif d-h < 75:
-                fw_array[index_d, index_w] = -1
-            elif Pr_detectability > 0 and dR <= h/dR_need:
-                fw_array[index_d, index_w] = 1
+            if Pr_detectability > 0 and dR<=h/3:
+                fw_array[index_r, index_w] = 1
             else:
-                fw_array[index_d, index_w] = -1
+                fw_array[index_r, index_w] = -1
 
     return fw_array
 
 calc_detectability()
-
+print(fw_array)
 
 # アウトプットを保存するフォルダを作成
 folder_name = "output_detectability/LRS_only"
@@ -107,19 +104,19 @@ plt.figure(figsize=(20, 10))
 plt.subplots_adjust(wspace=0.3)
 plt.subplots_adjust(hspace=0.3)
 
-plt.plot(width, height, 'k', label='tube height h')
+plt.plot(width, roof, 'k', label='tube height h')
 plt.imshow(fw_array, origin='lower', cmap='coolwarm', aspect='equal',  vmin=-1, vmax=1)
-#plt.colorbar()
+plt.colorbar()
 
 # タイトルの設定
-plt.title('Detectable Tubes by LRS, meet [Kaku+,2017] second interpretation ', size=24)
+plt.title('Cese'+str(case_num), size=24)
 #else:
 #    plt.title('Case'+ str(params['case_number']) + ':' \
 #        r"$h = $" + str(altitude/1000) +'[km], '+  'Noise Level=' + str(params['noise_level']) + '[W]', size = 24)
 plt.xlabel('Tube Width [m]', size=20)  # 横軸のラベルを設定
 plt.ylabel('Tube Depth [m]', size=20)  # 縦軸のラベルを設定
-plt.xticks(np.arange(len(width)), width)
-plt.yticks(np.arange(len(depth)), depth)
+#plt.xticks(np.arange(len(width)), width)
+#plt.yticks(np.arange(len(roof)), roof)
 #plt.xlim(0, 20)
 #plt.ylim(0, 10)
 plt.tick_params(axis='both', labelsize=15)
@@ -131,5 +128,5 @@ plt.legend(fontsize=16)
 #plt.savefig(folder_name + '/detectabilitymap.png')
 
 
-plt.savefig(folder_name + "/power.png")
+#plt.savefig(folder_name + "/power.png")
 plt.show()
