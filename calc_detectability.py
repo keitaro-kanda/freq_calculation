@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 # 選択するパラメータファイルの指定
-params_file = "rover2"  # orbiter/rover2
+params_file = "rover"  # orbiter/rover2
 
 # パラメータファイルの読み込み
 with open('params/'+params_file + '_params.json') as f:

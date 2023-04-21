@@ -23,8 +23,5 @@
     "max_frequency": 151,
     "frequency_step": 1.0,
 
-    "min_depth": 1.0,
-    "max_depth": 501.0,
-    "depth_step": 1.0,
     "altitude": 100e3
 }
