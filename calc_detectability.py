@@ -15,18 +15,6 @@ with open('params/'+params_file + '_params.json') as f:
 # Cese Number
 case_num = 1
 
-# 変数の定義
-c = params['speed_of_light'] #真空中の光速[m/s]
-pi = np.pi  # 円周率π
-
-epsilon_r = params['epsilon_r']  # 地面の比誘電率
-epsilon_0 = params['epsilon_0']  # 真空の誘電率　
-
-loss_tangent = params['loss_tangent']  # losstangent
-gain = 10 ** (params['antenna_gain']/10) # アンテナゲイン[dBi]
-Pt = params['transmit_power'] # 放射パワー[W]
-noise_level = params['noise_level'] # ノイズレベル[W]
-
 # 中心周波数
 if case_num==1:
     frequency = params['center_freq1'] 
@@ -40,6 +28,19 @@ elif case_num==5:
     frequency = params['center_freq5']
 elif case_num==6:
     frequency = params['center_freq6']
+
+
+# 変数の定義
+c = params['speed_of_light'] #真空中の光速[m/s]
+pi = np.pi  # 円周率π
+
+epsilon_r = params['epsilon_r']  # 地面の比誘電率
+epsilon_0 = params['epsilon_0']  # 真空の誘電率　
+
+loss_tangent = params['loss_tangent']  # losstangent
+gain = 10 ** (params['antenna_gain']/10) # アンテナゲイン[dBi]
+Pt = params['transmit_power'] # 放射パワー[W]
+noise_level = params['noise_level'] # ノイズレベル[W]
 
 width_min = params['width_min'] # チューブ幅の最小値[m]
 width_max = params['width_max'] # チューブ幅の最大値[m]
