@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 # 選択するパラメータファイルの指定
-params_file = "orbier"  # orbiter/rover
+params_file = "orbiter"  # orbiter/rover
 
 # パラメータファイルの読み込み
 with open('params/'+params_file + '_params.json') as f:
@@ -13,7 +13,7 @@ with open('params/'+params_file + '_params.json') as f:
 
 
 # Cese Number
-case_num = 1
+case_num = 4
 # 中心周波数
 frequency = params['center_freq'+str(case_num)]
 
