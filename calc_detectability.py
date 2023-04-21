@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 # 選択するパラメータファイルの指定
-params_file = "orbiter"  # orbiter/rover2
+params_file = "rover"  # orbiter/rover
 
 # パラメータファイルの読み込み
 with open('params/'+params_file + '_params.json') as f:
@@ -13,7 +13,8 @@ with open('params/'+params_file + '_params.json') as f:
 
 
 # Cese Number
-case_num = params['case_number']
+case_num = 1
+
 # 変数の定義
 c = params['speed_of_light'] #真空中の光速[m/s]
 pi = np.pi  # 円周率π
@@ -26,7 +27,19 @@ gain = 10 ** (params['antenna_gain']/10) # アンテナゲイン[dBi]
 Pt = params['transmit_power'] # 放射パワー[W]
 noise_level = params['noise_level'] # ノイズレベル[W]
 
-frequency = params['center_frequency'] # 中心周波数
+# 中心周波数
+if case_num==1:
+    frequency = params['center_freq1'] 
+elif case_num==2:
+    frequency = params['center_freq2']
+elif case_num==3:
+    frequency = params['center_freq3']
+elif case_num==4:
+    frequency = params['center_freq4']
+elif case_num==5:
+    frequency = params['center_freq5']
+elif case_num==6:
+    frequency = params['center_freq6']
 
 width_min = params['width_min'] # チューブ幅の最小値[m]
 width_max = params['width_max'] # チューブ幅の最大値[m]
@@ -77,7 +90,7 @@ def calc_detectability():
                 
 
             # 検出可能性の判定
-            if Pr_detectability > 0 and dR<=h/3:
+            if Pr_detectability > 0 and dR<=h/2:
                 fw_array[index_r, index_w] = 1
             else:
                 fw_array[index_r, index_w] = -1
@@ -88,7 +101,7 @@ calc_detectability()
 
 
 # アウトプットを保存するフォルダを作成
-folder_name = "output_detectability/"+str(params_file)
+folder_name = "output_detectability/"+str(params_file)+'/'+str(case_num)
 
 
 if not os.path.exists(folder_name):
@@ -119,7 +132,7 @@ plt.grid()
 
 
 # プロットの保存
-plt.savefig(folder_name + str(case_num) + '/detectabilitymap.png')
+plt.savefig(folder_name+'/detectabilitymap.png')
 
 
 #plt.savefig(folder_name + "/power.png")
