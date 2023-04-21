@@ -1,6 +1,6 @@
 speed_of_light: 299792458
-case_number: 2
-center_frequency: 200
+case_number: 1
+center_frequency: 5
 epsilon_r: 4.0
 epsilon_0: 1.0
 loss_tangent: 0.01
@@ -10,7 +10,10 @@ width_step: 2
 roof_min: 1
 roof_max: 62
 roof_step: 2
-antenna_gain: 3
-transmit_power: 0.5
+antenna_gain: 2.15
+transmit_power: 800
 noise_level: 1e-12
-altitude: 0.5
+min_frequency: 1.0
+max_frequency: 151
+frequency_step: 1.0
+altitude: 100000.0

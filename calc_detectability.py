@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 # 選択するパラメータファイルの指定
-params_file = "rover"  # orbiter/rover2
+params_file = "orbiter"  # orbiter/rover2
 
 # パラメータファイルの読み込み
 with open('params/'+params_file + '_params.json') as f:
@@ -88,7 +88,7 @@ calc_detectability()
 
 
 # アウトプットを保存するフォルダを作成
-folder_name = "output_detectability/LRS_only"
+folder_name = "output_detectability/"+str(params_file)
 
 
 if not os.path.exists(folder_name):
@@ -119,7 +119,7 @@ plt.grid()
 
 
 # プロットの保存
-#plt.savefig(folder_name + '/detectabilitymap.png')
+plt.savefig(folder_name + str(case_num) + '/detectabilitymap.png')
 
 
 #plt.savefig(folder_name + "/power.png")
