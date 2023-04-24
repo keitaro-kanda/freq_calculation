@@ -3,6 +3,7 @@ import os
 
 import matplotlib.pyplot as plt
 import numpy as np
+from matplotlib.lines import lineStyles
 
 # 選択するパラメータファイルの指定
 params_file = "orbiter"  # orbiter/rover
@@ -111,8 +112,6 @@ with open(folder_name + '/params.txt', mode='w') as f:
 
 # プロットの作成
 plt.figure(figsize=(12, 10))
-plt.subplots_adjust(wspace=0.3)
-plt.subplots_adjust(hspace=0.3)
 
 plt.imshow(fw_array, origin='lower', cmap='coolwarm', aspect='equal',  vmin=-1, vmax=1)
 #plt.colorbar()
@@ -130,8 +129,9 @@ elif setting == 'LRS':
 plt.xlabel('Tube Width [m]', size=20)  # 横軸のラベルを設定
 plt.ylabel('Roof Hight [m]', size=20)  # 縦軸のラベルを設定
 plt.tick_params(axis='both', labelsize=15)
-plt.grid()
 
+plt.minorticks_on()
+plt.grid()
 
 # プロットの保存
 plt.savefig(folder_name+'/detectabilitymap.png')
